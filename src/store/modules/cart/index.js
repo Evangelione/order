@@ -1,4 +1,4 @@
-import { placeOrderList, recommendGoods, notificationWs } from '@/api/order'
+import { placeOrderList, recommendGoods, notificationWs } from '@/api/cart'
 import router from '@/router'
 import { SET_STATION, SET_ORDER_LIST, SET_WS, SET_RECOMMEND_LIST } from './types'
 // initial state
@@ -104,6 +104,11 @@ const actions = {
   },
   placeOrderList({ commit, state, dispatch }, payload) {
     placeOrderList(payload).then(res => {
+      if (res.result.action === 'go_back') {
+        router.replace(`/cart/${res.result.s_id}`)
+        dispatch('placeOrderList', { s_id: res.result.s_id })
+        return
+      }
       console.log(res)
       commit(SET_STATION, res.result.info)
       commit(SET_ORDER_LIST, res.result.list)

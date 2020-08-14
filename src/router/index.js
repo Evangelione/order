@@ -19,20 +19,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "Login" */ '@/views/login'),
   },
   {
-    path: '/userOrder/:sId',
-    component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart'),
+    path: '/cart/:sId',
+    component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart'),
     children: [
       {
         path: '',
-        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/PlaceOrder'),
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/PlaceOrder'),
       },
       {
         path: 'bind/:orderId',
-        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/BindOrder'),
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/BindOrder'),
       },
       {
         path: 'shelves/:orderId',
-        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/CommodityList'),
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/CommodityList'),
       },
     ],
   },

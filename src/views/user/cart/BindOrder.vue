@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { bindOrder } from '@/api/order'
+import { bindOrder } from '@/api/cart'
 
 export default {
   name: 'BindOrder',
@@ -35,7 +35,7 @@ export default {
       face_id,
       staff_id: staff_id || 0,
     }).then(res => {
-      this.$router.replace({ path: `/userOrder/${res.result.s_id}` })
+      this.$router.replace({ path: `/cart/${res.result.s_id}` })
     })
   },
 

@@ -80,7 +80,7 @@
               </template>
             </van-card>
           </div>
-          <van-empty description="暂无套餐" v-if="serviceList.length === 0"></van-empty>
+          <van-empty description="暂无套餐" v-if="serviceList.length === 0" />
         </van-index-bar>
       </template>
     </van-tree-select>
@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { retailGoodsList, serviceGoodsList, packageGoodsList, addGoodsList } from '@/api/order'
+import { retailGoodsList, serviceGoodsList, packageGoodsList, addGoodsList } from '@/api/cart'
 import { mapState, mapActions } from 'vuex'
 
 export default {

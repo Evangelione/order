@@ -7,7 +7,7 @@
         </div>
         <div>用户登录</div>
       </div>
-      <van-form @failed="onFailed" @submit="onSubmit" ref="form" validate-first>
+      <van-form :show-error="false" @failed="onFailed" @submit="onSubmit" ref="form" validate-first>
         <van-field
           :rules="[{ required: true, pattern: /^[1][3-9][0-9]{9}$/ }]"
           class="input"
@@ -49,7 +49,9 @@
               native-type="button"
               size="small"
               type="primary"
-            >{{ timer ? time : '发送验证码' }}</van-button>
+            >
+              {{ timer ? time : '发送验证码' }}
+            </van-button>
           </template>
         </van-field>
         <van-field

@@ -17,7 +17,7 @@
           <div v-if="item.type == '1'">
             <span v-if="item.need_service_personnel === '1' && item.remark_service_personnel !== '0' && !item.supply">
               {{ item.remark_service_personnel_name }} - {{ item.remark_service_personnel_level }} （¥{{
-              item.remark_service_personnel_price
+                item.remark_service_personnel_price
               }}）
             </span>
             <van-row v-else>
@@ -36,7 +36,9 @@
               size="mini"
               type="primary"
               v-if="item.status == '0' && item.need_service_personnel === '1'"
-            >预选技师</van-button>
+            >
+              预选技师
+            </van-button>
           </div>
 
           <div class="package-box" v-if="item.type == '4'">
@@ -45,7 +47,7 @@
                 <span class="goods-name">{{ i.name }} x1</span>
                 <span v-if="i.need_service_personnel === '1' && i.remark_service_personnel !== '0' && !i.supply">
                   {{ i.remark_service_personnel_name }} - {{ i.remark_service_personnel_level }} （¥{{
-                  i.remark_service_personnel_price
+                    i.remark_service_personnel_price
                   }}）
                 </span>
                 <van-button
@@ -54,7 +56,9 @@
                   size="mini"
                   type="primary"
                   v-if="i.status == '0' && i.need_service_personnel === '1'"
-                >预选技师</van-button>
+                >
+                  预选技师
+                </van-button>
               </div>
               <van-row v-if="i.supply">
                 <van-col :key="index" span="6" v-for="(i, index) in i.supply">
@@ -120,8 +124,12 @@
           size="small"
           type="primary"
           v-if="goods.type == '2' && !goods.add"
-        >确认修改</van-button>
-        <van-button @click="addCommodity(goods.num)" size="small" type="primary" v-if="goods.add">加入购物车</van-button>
+        >
+          确认修改
+        </van-button>
+        <van-button @click="addCommodity(goods.num)" size="small" type="primary" v-if="goods.add">
+          加入购物车
+        </van-button>
       </div>
     </v-popup>
   </base-layout>
@@ -136,7 +144,7 @@ import {
   settlementOrder,
   commitOrder,
   pushStaff,
-} from '@/api/order'
+} from '@/api/cart'
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   name: 'PlaceOrder',
@@ -208,7 +216,7 @@ export default {
     ...mapActions('order', ['placeOrderList', 'notificationWs']),
     onClickRight() {
       this.$router.push({
-        path: `/userOrder/${this.$route.params.sId}/shelves/${this.station.order_id}`,
+        path: `/cart/${this.$route.params.sId}/shelves/${this.station.order_id}`,
         query: {
           store_id: this.station.store_id,
         },
