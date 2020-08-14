@@ -6,12 +6,15 @@ module.exports = {
     // proxy: 'http://cs.7youke.com',
     proxy: 'https://www.9youke.com',
     // proxy: 'http://cs.czg365.cn',
+    // FBE065
+    // F9D651
   },
   css: {
     loaderOptions: {
       less: {
         modifyVars: {
-          'primary-base': '#FAE04C',
+          'primary-base': '#F6BD44',
+          'primary-light': '#F9D651',
           'primary-deep': '#FAA04C',
           // Functional Color
           'color-success': '#67C23A',
@@ -44,11 +47,11 @@ module.exports = {
           // tab-bar
           'tabbar-item-active-color': '@color-text-primary',
           // tabs
-          'tabs-default-color': '@primary-base',
+          'tabs-default-color': '@primary-light',
           // button
           'button-primary-color': '@color-text-primary',
-          'button-primary-background-color': '@primary-base',
-          'button-primary-border-color': '@primary-base',
+          'button-primary-background-color': '@primary-light',
+          'button-primary-border-color': '@primary-light',
           // card
           'card-text-color': '@color-text-primary',
           'card-price-color': '@primary-deep',
@@ -57,12 +60,17 @@ module.exports = {
           // index-bar
           'index-bar-index-active-color': '@primary-base',
           // index-anchor
-          'index-anchor-sticky-text-color': '@primary-deep',
+          'index-anchor-sticky-text-color': '@primary-base',
           // side-bar
-          'sidebar-selected-border-color': '@primary-base',
+          'sidebar-selected-border-color': '@primary-light',
+          // submit-bar
+          'submit-bar-price-color': '@primary-deep',
           // info
           'info-dot-color': '@primary-deep',
           'info-background-color': '@primary-deep',
+          // field
+          'field-error-message-color': '@color-danger',
+          'field-input-error-text-color': '@color-danger',
         },
       },
       postcss: {
@@ -78,8 +86,9 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/neworder/' : '/',
   configureWebpack: {
     externals: {
-      // vue: 'Vue',
-      // 'vue-router': 'VueRouter',
+      vue: 'Vue',
+      vuex: 'Vuex',
+      'vue-router': 'VueRouter',
     },
   },
 }

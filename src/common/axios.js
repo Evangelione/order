@@ -29,6 +29,18 @@ axios.interceptors.response.use(
     // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
     // 否则的话抛出错误
     if (response.status === 200) {
+      if (response.data.errorCode == '20044013') {
+        Toast.fail({
+          message: '请登录',
+          onClose: () => {
+            router.replace({
+              path: '/login',
+              query: { redirect: router.currentRoute.fullPath },
+            })
+          },
+        })
+        return Promise.reject()
+      }
       return Promise.resolve(response.data)
     } else {
       return Promise.reject(response)

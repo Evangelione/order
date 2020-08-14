@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import '@/common/vant'
 import '@/common/axios'
-import BaseLayout from '@/components/BaseLayout'
+import components from '@/components'
+
+Vue.use(components)
 
 Vue.config.productionTip = false
 
@@ -16,8 +18,9 @@ Vue.mixin({
     _goBack() {
       this.$router.go(-1)
     },
-    _toast(message = '操作成功', callback = () => {}) {
-      this.$toast.success({
+    _toast(message = '操作成功', callback = () => {}, type = 'success') {
+      this.$toast({
+        type: type,
         message: message,
         forbidClick: true,
         duration: 850,
@@ -34,8 +37,6 @@ Vue.mixin({
     },
   },
 })
-
-Vue.component('base-layout', BaseLayout)
 
 new Vue({
   router,

@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import UserOrderApi from '@/api/user_order'
+import { retailGoodsList, serviceGoodsList, packageGoodsList, addGoodsList } from '@/api/order'
 import { mapState, mapActions } from 'vuex'
 
 export default {
@@ -126,7 +126,7 @@ export default {
   },
 
   computed: {
-    ...mapState('userOrder', ['station', 'orderList', 'recommendList']),
+    ...mapState('order', ['station', 'orderList', 'recommendList']),
     height() {
       return window.innerHeight - 130.8
     },
@@ -144,9 +144,10 @@ export default {
   created() {},
 
   mounted() {
-    const { storeId, orderId } = this.$route.params
+    const { orderId } = this.$route.params
+    const { store_id } = this.$route.query
     // 读取商品列表 && 向购物车中添加已购买数据
-    UserOrderApi.retailGoodsList({ store_id: storeId, order_id: orderId }).then(res => {
+    retailGoodsList({ store_id, order_id: orderId }).then(res => {
       let list = []
       for (let i in res.result) {
         list.push(res.result[i])
@@ -166,7 +167,7 @@ export default {
     })
 
     // 读取服务列表 && 向购物车中添加已购买数据
-    UserOrderApi.serviceGoodsList({ store_id: storeId, order_id: orderId }).then(res => {
+    serviceGoodsList({ store_id, order_id: orderId }).then(res => {
       let list = []
       for (let i in res.result) {
         list.push(res.result[i])
@@ -187,7 +188,7 @@ export default {
     })
 
     // 读取套餐列表 && 向购物车中添加已购买数据
-    UserOrderApi.packageGoodsList({ store_id: storeId, order_id: orderId }).then(res => {
+    packageGoodsList({ store_id, order_id: orderId }).then(res => {
       let list = []
       for (let i in res.result) {
         list.push(res.result[i])
@@ -210,7 +211,7 @@ export default {
   destroyed() {},
 
   methods: {
-    ...mapActions('userOrder', ['placeOrderList', 'notificationWs']),
+    ...mapActions('order', ['placeOrderList', 'notificationWs']),
     minus(type, id) {
       const index = this.cart.findIndex(item => {
         if (item.id === id) {
@@ -259,11 +260,13 @@ export default {
     },
     onSubmit() {
       console.log('submit')
-      const { sId, storeId } = this.$route.params
-      UserOrderApi.addGoodsList({
+      const { sId } = this.$route.params
+      const { store_id } = this.$route.query
+
+      addGoodsList({
         list: this.cart,
         s_id: sId,
-        store_id: storeId,
+        store_id,
       }).then(() => {
         this._toast('已加入购物车', () => {
           this.placeOrderList({ s_id: sId })

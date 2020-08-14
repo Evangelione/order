@@ -32,7 +32,7 @@ export default {
   destroyed() {},
 
   methods: {
-    ...mapActions('userOrder', ['placeOrderList']),
+    ...mapActions('order', ['placeOrderList']),
   },
 }
 </script>

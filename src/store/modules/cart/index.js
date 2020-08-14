@@ -1,4 +1,4 @@
-import UserOrderApi from '@/api/user_order'
+import { placeOrderList, recommendGoods, notificationWs } from '@/api/order'
 import router from '@/router'
 import { SET_STATION, SET_ORDER_LIST, SET_WS, SET_RECOMMEND_LIST } from './types'
 // initial state
@@ -103,7 +103,7 @@ const actions = {
     commit(SET_WS, ws)
   },
   placeOrderList({ commit, state, dispatch }, payload) {
-    UserOrderApi.placeOrderList(payload).then(res => {
+    placeOrderList(payload).then(res => {
       console.log(res)
       commit(SET_STATION, res.result.info)
       commit(SET_ORDER_LIST, res.result.list)
@@ -122,7 +122,7 @@ const actions = {
   },
   recommendGoods({ state, commit, getters }) {
     console.log(Array.from(getters.goodsSet))
-    UserOrderApi.recommendGoods({
+    recommendGoods({
       goods_ids: Array.from(getters.goodsSet),
       service_ids: Array.from(getters.serviceSet),
       store_id: state.station.store_id,
@@ -154,7 +154,7 @@ const actions = {
     })
   },
   notificationWs({ state }) {
-    UserOrderApi.notificationWs({
+    notificationWs({
       sid: state.station.s_id,
       uid: state.station.uid,
     })

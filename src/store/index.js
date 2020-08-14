@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import userOrder from './modules/userOrder'
+import order from './modules/cart'
 
 Vue.use(Vuex)
 
@@ -9,6 +9,6 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    userOrder,
+    order,
   },
 })

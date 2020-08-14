@@ -15,11 +15,11 @@
       >
         <template #footer>
           <div v-if="item.type == '1'">
-            <span v-if="item.need_service_personnel === '1' && item.remark_service_personnel !== '0' && !item.supply"
-              >{{ item.remark_service_personnel_name }} - {{ item.remark_service_personnel_level }} （¥{{
-                item.remark_service_personnel_price
-              }}）</span
-            >
+            <span v-if="item.need_service_personnel === '1' && item.remark_service_personnel !== '0' && !item.supply">
+              {{ item.remark_service_personnel_name }} - {{ item.remark_service_personnel_level }} （¥{{
+              item.remark_service_personnel_price
+              }}）
+            </span>
             <van-row v-else>
               <van-col :key="index" span="6" v-for="(item, index) in item.supply">
                 <div class="technician-box">
@@ -36,27 +36,25 @@
               size="mini"
               type="primary"
               v-if="item.status == '0' && item.need_service_personnel === '1'"
-              >预选技师</van-button
-            >
+            >预选技师</van-button>
           </div>
 
           <div class="package-box" v-if="item.type == '4'">
             <div :key="index2" v-for="(i, index2) in item.detail">
               <div>
                 <span class="goods-name">{{ i.name }} x1</span>
-                <span v-if="i.need_service_personnel === '1' && i.remark_service_personnel !== '0' && !i.supply"
-                  >{{ i.remark_service_personnel_name }} - {{ i.remark_service_personnel_level }} （¥{{
-                    i.remark_service_personnel_price
-                  }}）</span
-                >
+                <span v-if="i.need_service_personnel === '1' && i.remark_service_personnel !== '0' && !i.supply">
+                  {{ i.remark_service_personnel_name }} - {{ i.remark_service_personnel_level }} （¥{{
+                  i.remark_service_personnel_price
+                  }}）
+                </span>
                 <van-button
                   @click.stop="appointTechnician(i)"
                   round
                   size="mini"
                   type="primary"
                   v-if="i.status == '0' && i.need_service_personnel === '1'"
-                  >预选技师</van-button
-                >
+                >预选技师</van-button>
               </div>
               <van-row v-if="i.supply">
                 <van-col :key="index" span="6" v-for="(i, index) in i.supply">
@@ -74,7 +72,7 @@
       </van-card>
     </div>
 
-    <div class="recommend-box">
+    <div class="recommend-box" v-if="recommendList.length">
       <van-divider>推荐搭配</van-divider>
       <van-swipe :autoplay="3000" indicator-color="white">
         <van-swipe-item :key="index" v-for="(item, index) in recommendList">
@@ -122,30 +120,30 @@
           size="small"
           type="primary"
           v-if="goods.type == '2' && !goods.add"
-          >确认修改</van-button
-        >
-        <van-button @click="addCommodity(goods.num)" size="small" type="primary" v-if="goods.add"
-          >加入购物车</van-button
-        >
+        >确认修改</van-button>
+        <van-button @click="addCommodity(goods.num)" size="small" type="primary" v-if="goods.add">加入购物车</van-button>
       </div>
     </v-popup>
   </base-layout>
 </template>
 
 <script>
-import UserOrderApi from '@/api/user_order'
+import {
+  technicianList,
+  appointTechnician,
+  addGoods,
+  modifyGoods,
+  settlementOrder,
+  commitOrder,
+  pushStaff,
+} from '@/api/order'
 import { mapState, mapGetters, mapActions } from 'vuex'
-import SinglePicker from '@/components/SinglePicker'
-import VPopup from '@/components/VPopup'
 export default {
   name: 'PlaceOrder',
 
   mixins: [],
 
-  components: {
-    SinglePicker,
-    VPopup,
-  },
+  components: {},
 
   props: {},
 
@@ -160,8 +158,8 @@ export default {
   },
 
   computed: {
-    ...mapState('userOrder', ['station', 'orderList', 'recommendList']),
-    ...mapGetters('userOrder', ['totalPrice']),
+    ...mapState('order', ['station', 'orderList', 'recommendList']),
+    ...mapGetters('order', ['totalPrice']),
     submitText() {
       if (this.orderList.length > 0) {
         let str = '结算'
@@ -200,14 +198,21 @@ export default {
 
   created() {},
 
-  mounted() {},
+  mounted() {
+    console.log(this.$route)
+  },
 
   destroyed() {},
 
   methods: {
-    ...mapActions('userOrder', ['placeOrderList', 'notificationWs']),
+    ...mapActions('order', ['placeOrderList', 'notificationWs']),
     onClickRight() {
-      this.$router.push(`/userOrder/${this.$route.params.sId}/order/${this.station.store_id}/${this.station.order_id}`)
+      this.$router.push({
+        path: `/userOrder/${this.$route.params.sId}/shelves/${this.station.order_id}`,
+        query: {
+          store_id: this.station.store_id,
+        },
+      })
     },
     commodityType(type) {
       let name = ''
@@ -249,7 +254,7 @@ export default {
     },
     appointTechnician(item) {
       this.goods_id = item.id
-      UserOrderApi.technicianList({ store_id: this.station.store_id, id: item.goods_appoint_id }).then(res => {
+      technicianList({ store_id: this.station.store_id, id: item.goods_appoint_id }).then(res => {
         this.technicianList = res.result.map(item => {
           if (item.status != '0') {
             item.text = `${item.name} - ${item.technician_grade_name || '暂无等级'} （¥${item.service_fee}）（服务中）`
@@ -264,7 +269,7 @@ export default {
     },
     pickTechnician(data) {
       console.log(data)
-      UserOrderApi.appointTechnician({
+      appointTechnician({
         id: this.goods_id,
         order_id: this.station.order_id,
         staff_id: data.id,
@@ -280,7 +285,7 @@ export default {
     },
     addCommodity(num) {
       console.log(this.goods)
-      UserOrderApi.addGoods({
+      addGoods({
         order_id: this.station.order_id,
         list: {
           id: this.goods.goods_id || this.goods.appoint_id,
@@ -299,7 +304,7 @@ export default {
     },
     modifyCommodity(num) {
       console.log(this.goods)
-      UserOrderApi.modifyGoods({ id: this.goods.id, num }).then(() => {
+      modifyGoods({ id: this.goods.id, num }).then(() => {
         this._toast('修改成功', () => {
           this.placeOrderList({ s_id: this.station.s_id })
           if (this.station.s_tag == '2') {
@@ -335,7 +340,7 @@ export default {
     },
     onSubmit() {
       if (this.submitText == '结算') {
-        UserOrderApi.settlementOrder({ order_id: this.station.order_id }).then(res => {
+        settlementOrder({ order_id: this.station.order_id }).then(res => {
           if (res.errorCode != '0') {
             this.$notify({ type: 'warning', message: res.errorMsg })
           } else {
@@ -354,14 +359,14 @@ export default {
         if (this.site) {
           params.s_id = this.site
         }
-        UserOrderApi.commitOrder(params).then(() => {
+        commitOrder(params).then(() => {
           this._toast('订单已提交', () => {
             this.placeOrderList({ s_id: this.station.s_id })
             if (this.station.s_tag == '2') {
               this.notificationWs()
             }
             if (isFirst) {
-              UserOrderApi.pushStaff()
+              pushStaff()
             }
           })
         })

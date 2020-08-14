@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import commonApi from '@/api/common'
+import { uploadImage } from '@/api/common'
 import Compressor from 'compressorjs'
 import VPopup from '@/components/VPopup'
 import VButton from '@/components/VButton'
@@ -110,10 +110,9 @@ export default {
               reader.readAsDataURL(result)
               reader.onloadend = () => {
                 // Send the compressed image file to server with XMLHttpRequest.
-                commonApi
-                  .uploadImage({
-                    imgBase: reader.result,
-                  })
+                uploadImage({
+                  imgBase: reader.result,
+                })
                   .then(response => {
                     if (response.error === 0) {
                       console.log(response)

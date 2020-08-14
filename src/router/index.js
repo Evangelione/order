@@ -7,22 +7,32 @@ const routes = [
   {
     path: '/',
     component: () => import(/* webpackChunkName: "Wap" */ '@/views'),
-  },
-  {
-    path: '/login',
-    component: () => import(/* webpackChunkName: "Login" */ '@/views/Login'),
-  },
-  {
-    path: '/userOrder/:sId',
-    component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/UserOrder'),
     children: [
       {
         path: '',
-        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/UserOrder/PlaceOrder'),
+        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/PlaceOrder'),
+      },
+    ],
+  },
+  {
+    path: '/login',
+    component: () => import(/* webpackChunkName: "Login" */ '@/views/login'),
+  },
+  {
+    path: '/userOrder/:sId',
+    component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart'),
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/PlaceOrder'),
       },
       {
-        path: 'order/:storeId/:orderId',
-        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/UserOrder/CommodityList'),
+        path: 'bind/:orderId',
+        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/BindOrder'),
+      },
+      {
+        path: 'shelves/:orderId',
+        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/CommodityList'),
       },
     ],
   },

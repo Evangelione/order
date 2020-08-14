@@ -24,32 +24,41 @@
 
     <template #footer>
       <van-tabbar :fixed="false" v-model="active">
-        <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-        <van-tabbar-item icon="search">标签</van-tabbar-item>
-        <van-tabbar-item icon="friends-o">标签</van-tabbar-item>
-        <van-tabbar-item icon="setting-o">标签</van-tabbar-item>
+        <van-tabbar-item>
+          首页
+          <template #icon="props">
+            <img :src="props.active ? icons.home.active : icons.home.inactive" />
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item icon="search">
+          发现
+          <template #icon="props">
+            <img :src="props.active ? icons.find.active : icons.find.inactive" />
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item>
+          订单
+          <template #icon="props">
+            <img :src="props.active ? icons.order.active : icons.order.inactive" />
+          </template>
+        </van-tabbar-item>
+        <van-tabbar-item>
+          我的
+          <template #icon="props">
+            <img :src="props.active ? icons.mine.active : icons.mine.inactive" />
+          </template>
+        </van-tabbar-item>
       </van-tabbar>
     </template>
   </base-layout>
 </template>
 
 <script>
-import api from '@/api/login'
-import BaseLayout from '@/components/BaseLayout'
-import SinglePicker from '@/components/SinglePicker'
-import VButton from '@/components/VButton'
-import ImageCropper from '@/components/ImageCropper'
-
 export default {
   name: 'Index',
   mixins: [],
 
-  components: {
-    BaseLayout,
-    SinglePicker,
-    VButton,
-    ImageCropper,
-  },
+  components: {},
 
   props: {},
 
@@ -60,6 +69,24 @@ export default {
       active: 0,
       uploader: [],
       img: '',
+      icons: {
+        home: {
+          active: require('@/assets/images/home-active.png'),
+          inactive: require('@/assets/images/home.png'),
+        },
+        find: {
+          active: require('@/assets/images/find-active.png'),
+          inactive: require('@/assets/images/find.png'),
+        },
+        order: {
+          active: require('@/assets/images/order-active.png'),
+          inactive: require('@/assets/images/order.png'),
+        },
+        mine: {
+          active: require('@/assets/images/mine-active.png'),
+          inactive: require('@/assets/images/mine.png'),
+        },
+      },
     }
   },
 
@@ -81,12 +108,12 @@ export default {
       console.log(data)
     },
     confrim() {
-      return new Promise(resolve => {
-        this.$http.post(api.login).then(response => {
-          console.log(response.data)
-          resolve()
-          this._toast('获取成功')
-        })
+      return new Promise(() => {
+        // this.$http.post(api.login).then(response => {
+        //   console.log(response.data)
+        //   resolve()
+        //   this._toast('获取成功')
+        // })
       })
     },
     afterRead(file) {
@@ -104,4 +131,8 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.van-tabbar-item__icon img {
+  height: 24px;
+}
+</style>
