@@ -71,6 +71,11 @@ module.exports = {
           // field
           'field-error-message-color': '@color-danger',
           'field-input-error-text-color': '@color-danger',
+          // search
+          'search-left-icon-color': '@color-text-regular',
+          'search-action-text-color': '@primary-base',
+          // swipe
+          'swipe-indicator-active-background-color': '@primary-light',
         },
       },
       postcss: {

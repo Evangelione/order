@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <van-nav-bar
-      :left-arrow="arrow"
-      :left-text="left"
-      :right-text="right"
-      :title="header"
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-      v-if="header"
-    />
+    <slot name="header">
+      <van-nav-bar
+        :left-arrow="arrow"
+        :left-text="left"
+        :right-text="right"
+        :title="header"
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+        v-if="header"
+      />
+    </slot>
     <div class="flex">
       <slot />
     </div>

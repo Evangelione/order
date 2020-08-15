@@ -85,15 +85,18 @@
       </template>
     </van-tree-select>
 
-    <van-submit-bar
-      :disabled="totalPrice == 0"
-      :price="totalPrice"
-      @submit="onSubmit"
-      button-text="确认选择"
-      button-type="primary"
-      tip="选择的商品将会加入购物车"
-      tip-icon="info-o"
-    />
+    <template #footer>
+      <van-submit-bar
+        safe-area-inset-bottom
+        :disabled="totalPrice == 0"
+        :price="totalPrice"
+        @submit="onSubmit"
+        button-text="确认选择"
+        button-type="primary"
+        tip="选择的商品将会加入购物车"
+        tip-icon="info-o"
+      />
+    </template>
   </base-layout>
 </template>
 

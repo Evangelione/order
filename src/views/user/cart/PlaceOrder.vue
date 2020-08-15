@@ -97,6 +97,7 @@
     </div>
 
     <van-submit-bar
+      safe-area-inset-bottom
       :button-text="submitText"
       :disabled="submitDisabled"
       :price="totalPrice"

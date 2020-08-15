@@ -23,6 +23,7 @@ export default {
   created() {},
 
   mounted() {
+    console.log(process.env.BASE_URL)
     this.$toast.allowMultiple()
   },
 

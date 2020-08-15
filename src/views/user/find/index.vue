@@ -1,10 +1,12 @@
 <template>
-  <router-view />
+  <div>
+    find
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Find',
 
   mixins: [],
 

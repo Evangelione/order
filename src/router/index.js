@@ -6,11 +6,23 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "Wap" */ '@/views'),
+    component: () => import(/* webpackChunkName: "Wap" */ '@/views/user'),
     children: [
       {
-        path: '',
-        component: () => import(/* webpackChunkName: "UserOrder" */ '@/views/user/cart/PlaceOrder'),
+        path: 'home',
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/home'),
+      },
+      {
+        path: 'find',
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/find'),
+      },
+      {
+        path: 'order',
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/order'),
+      },
+      {
+        path: 'mine',
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/mine'),
       },
     ],
   },
@@ -35,6 +47,10 @@ const routes = [
         component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/CommodityList'),
       },
     ],
+  },
+  {
+    path: '*',
+    redirect: '/login',
   },
 ]
 

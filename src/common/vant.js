@@ -18,12 +18,12 @@ import {
   // Radio,
   // RadioGroup,
   // Rate,
-  // Search,
+  Search,
   Stepper,
   // Switch,
   // SwitchCell,
   Uploader,
-  // ActionSheet,
+  ActionSheet,
   // Dialog,
   // DropdownMenu,
   // DropdownItem,
@@ -37,7 +37,7 @@ import {
   Divider,
   Empty,
   // ImagePreview,
-  // Lazyload,
+  Lazyload,
   // List,
   // Panel,
   // Step,
@@ -45,9 +45,9 @@ import {
   // Sticky,
   Swipe,
   SwipeItem,
-  // Tag,
-  // Grid,
-  // GridItem,
+  Tag,
+  Grid,
+  GridItem,
   IndexBar,
   IndexAnchor,
   NavBar,
@@ -79,11 +79,11 @@ Vue.use(Form)
 Vue.use(Picker)
 // Vue.use(Radio).use(RadioGroup)
 // Vue.use(Rate)
-// Vue.use(Search)
+Vue.use(Search)
 Vue.use(Stepper)
 // Vue.use(Switch).use(SwitchCell)
 Vue.use(Uploader)
-// Vue.use(ActionSheet)
+Vue.use(ActionSheet)
 // Vue.use(Dialog)
 // Vue.use(DropdownMenu)
 // Vue.use(DropdownItem)
@@ -96,14 +96,14 @@ Vue.use(Toast)
 Vue.use(Divider)
 Vue.use(Empty)
 // Vue.use(ImagePreview)
-// Vue.use(Lazyload)
+Vue.use(Lazyload)
 // Vue.use(List)
 // Vue.use(Panel)
 // Vue.use(Step).use(Steps)
 // Vue.use(Sticky)
 Vue.use(Swipe).use(SwipeItem)
-// Vue.use(Tag)
-// Vue.use(Grid).use(GridItem)
+Vue.use(Tag)
+Vue.use(Grid).use(GridItem)
 Vue.use(IndexBar).use(IndexAnchor)
 Vue.use(NavBar)
 Vue.use(Sidebar).use(SidebarItem)
