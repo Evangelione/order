@@ -39,7 +39,7 @@ axios.interceptors.response.use(
             })
           },
         })
-        return Promise.reject()
+        return Promise.reject(response.data)
       }
       return Promise.resolve(response.data)
     } else {
@@ -92,7 +92,6 @@ axios.interceptors.response.use(
 
         // 其他错误，直接抛出错误提示
         default:
-          debugger
           Toast.fail(error.response.statusText)
       }
       return Promise.reject(error.response)

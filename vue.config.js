@@ -76,6 +76,8 @@ module.exports = {
           'search-action-text-color': '@primary-base',
           // swipe
           'swipe-indicator-active-background-color': '@primary-light',
+          // dialog
+          'dialog-confirm-button-text-color': '@primary-base',
         },
       },
       postcss: {

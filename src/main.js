@@ -5,7 +5,9 @@ import store from './store'
 import '@/common/vant'
 import '@/common/axios'
 import components from '@/components'
+import VueCookie from 'vue-cookie'
 
+Vue.use(VueCookie)
 Vue.use(components)
 
 Vue.config.productionTip = false

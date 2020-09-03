@@ -31,6 +31,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "Login" */ '@/views/login'),
   },
   {
+    path: '/cart/:sId/bind/:orderId',
+    component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/BindOrder'),
+  },
+  {
     path: '/cart/:sId',
     component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart'),
     children: [
@@ -39,14 +43,15 @@ const routes = [
         component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/PlaceOrder'),
       },
       {
-        path: 'bind/:orderId',
-        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/BindOrder'),
-      },
-      {
-        path: 'shelves/:orderId',
+        path: 'shelves/:orderId?',
         component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/cart/CommodityList'),
       },
     ],
+  },
+  {
+    path: '/wxBind',
+    name: 'wxBind',
+    component: () => import(/* webpackChunkName: "Cart" */ '@/views/wx-bind'),
   },
   {
     path: '*',

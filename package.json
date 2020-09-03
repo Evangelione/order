@@ -34,6 +34,7 @@
     "less-loader": "^5.0.0",
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^1.19.1",
+    "vue-cookie": "^1.1.4",
     "vue-template-compiler": "^2.6.11"
   }
 }

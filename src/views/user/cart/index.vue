@@ -22,12 +22,22 @@ export default {
 
   watch: {},
 
-  created() {},
-
-  mounted() {
-    const { sId } = this.$route.params
-    this.placeOrderList({ s_id: sId })
+  created() {
+    // 微信静默授权
+    var ua = navigator.userAgent.toLowerCase()
+    var isWeixin = ua.indexOf('micromessenger') != -1
+    if (isWeixin && !this.$cookie.get('wxAuth')) {
+      this.$router.replace({
+        name: 'wxBind',
+        query: { redirect: this.$route.fullPath },
+      })
+    } else {
+      const { sId } = this.$route.params
+      this.placeOrderList({ s_id: sId })
+    }
   },
+
+  mounted() {},
 
   destroyed() {},
 

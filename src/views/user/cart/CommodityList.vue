@@ -87,6 +87,7 @@
 
     <template #footer>
       <van-submit-bar
+        :loading="loading"
         safe-area-inset-bottom
         :disabled="totalPrice == 0"
         :price="totalPrice"
@@ -125,11 +126,12 @@ export default {
       retailList: [],
       serviceList: [],
       packageList: [],
+      loading: false,
     }
   },
 
   computed: {
-    ...mapState('order', ['station', 'orderList', 'recommendList']),
+    ...mapState('order', ['station']),
     height() {
       return window.innerHeight - 130.8
     },
@@ -147,7 +149,7 @@ export default {
   created() {},
 
   mounted() {
-    const { orderId } = this.$route.params
+    const { sId, orderId } = this.$route.params
     const { store_id } = this.$route.query
     // 读取商品列表 && 向购物车中添加已购买数据
     retailGoodsList({ store_id, order_id: orderId }).then(res => {
@@ -209,6 +211,9 @@ export default {
       })
       this.packageList = list
     })
+    if (!this.station) {
+      this.placeOrderList({ s_id: sId })
+    }
   },
 
   destroyed() {},
@@ -262,6 +267,7 @@ export default {
       }
     },
     onSubmit() {
+      this.loading = true
       console.log('submit')
       const { sId } = this.$route.params
       const { store_id } = this.$route.query
@@ -272,9 +278,11 @@ export default {
         store_id,
       }).then(() => {
         this._toast('已加入购物车', () => {
-          this.placeOrderList({ s_id: sId })
-          this.notificationWs()
+          this.loading = false
           this._goBack()
+        })
+        this.notificationWs().catch(() => {
+          console.log('catch')
         })
       })
     },

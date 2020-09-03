@@ -6,6 +6,8 @@ function getFormData(payload) {
   return qs.stringify(payload)
 }
 
+const { protocol } = window.location
+
 // 获取用户订单内商品
 export const placeOrderList = payload => {
   return axios.post('/wap.php?g=Wap&c=ScanOrder&a=placeOrderList', getFormData(payload))
@@ -40,10 +42,20 @@ export const commitOrder = payload => {
 }
 // ws通知
 export const notificationWs = ({ sid, uid }) => {
-  return axios.get(`http://127.0.0.1:8906/ws/update/${sid}/${uid}`)
+  return axios.get(`${protocol}//go.9youke.com/robot/ws/update/${sid}/${uid}`)
 }
-export const pushStaff = () => {
-  return
+// ws指定通知
+export const appointNotificationWs = ({ sid, uid }) => {
+  return axios.get(`${protocol}//go.9youke.com/robot/ws/appointUpdate/${sid}/${uid}`)
+}
+export const pushStaff = (mer_id, s_name, store_id, uid, order_no) => {
+  return axios.post(`${protocol}//go.9youke.com/robot/staff/orderNotice`, {
+    mer_id,
+    s_name,
+    store_id,
+    uid,
+    order_no,
+  })
 }
 // 推荐商品
 export const recommendGoods = payload => {

@@ -1,6 +1,11 @@
 import axios from 'axios'
 import qs from 'qs'
 
+function getFormData(payload) {
+  payload.ticket = localStorage.getItem('ticket')
+  return qs.stringify(payload)
+}
+
 // 获取logo
 const getLogo = () => axios.get('/xcxapi.php?c=Config&a=get_bgimage&type=login_bgimg_wx_staff')
 
@@ -29,4 +34,8 @@ const uploadImage = payload =>
     ticket: localStorage.getItem(process.env.VUE_APP_TOKEN),
   })
 
-export { getLogo, smsCode, login, registerAcc, uploadImage }
+const getWxCode = () => axios.get('/wap.php?g=wap&c=ScanOrder&a=getCode')
+
+const getOpenID = payload => axios.post('/wap.php?g=wap&c=ScanOrder&a=getOpenid', getFormData(payload))
+
+export { getLogo, smsCode, login, registerAcc, uploadImage, getWxCode, getOpenID }

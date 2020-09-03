@@ -76,6 +76,14 @@
       </van-card>
     </div>
 
+    <van-empty
+      :image="require('@/assets/images/bg.png')"
+      description="购物车内还没有商品哦"
+      v-if="orderList.length == 0"
+    >
+      <van-button round type="primary" @click="onClickRight">去选商品</van-button>
+    </van-empty>
+
     <div class="recommend-box" v-if="recommendList.length">
       <van-divider>推荐搭配</van-divider>
       <van-swipe :autoplay="3000" indicator-color="white">
@@ -97,7 +105,9 @@
     </div>
 
     <van-submit-bar
+      v-if="orderList.length != 0"
       safe-area-inset-bottom
+      :loading="loading"
       :button-text="submitText"
       :disabled="submitDisabled"
       :price="totalPrice"
@@ -119,7 +129,9 @@
         <van-stepper v-if="goods.type == '2' || goods.add" v-model="goods.num" />
       </div>
       <div class="opa">
-        <van-button @click="modifyCommodity(0)" size="small" type="primary" v-if="!goods.add">删除商品</van-button>
+        <van-button @click="modifyCommodity(0)" size="small" type="primary" v-if="!goods.add">
+          删除商品
+        </van-button>
         <van-button
           @click="modifyCommodity(goods.num)"
           size="small"
@@ -158,6 +170,7 @@ export default {
 
   data() {
     return {
+      loading: false,
       technicianList: [],
       stationList: [],
       goods_id: '',
@@ -207,21 +220,28 @@ export default {
 
   created() {},
 
-  mounted() {
-    console.log(this.$route)
-  },
+  mounted() {},
 
   destroyed() {},
 
   methods: {
     ...mapActions('order', ['placeOrderList', 'notificationWs']),
     onClickRight() {
-      this.$router.push({
-        path: `/cart/${this.$route.params.sId}/shelves/${this.station.order_id}`,
-        query: {
-          store_id: this.station.store_id,
-        },
-      })
+      if (this.station.order_id) {
+        this.$router.push({
+          path: `/cart/${this.$route.params.sId}/shelves/${this.station.order_id}`,
+          query: {
+            store_id: this.station.store_id,
+          },
+        })
+      } else {
+        this.$router.push({
+          path: `/cart/${this.$route.params.sId}/shelves`,
+          query: {
+            store_id: this.station.store_id,
+          },
+        })
+      }
     },
     commodityType(type) {
       let name = ''
@@ -315,6 +335,7 @@ export default {
       console.log(this.goods)
       modifyGoods({ id: this.goods.id, num }).then(() => {
         this._toast('修改成功', () => {
+          console.log('修改了1次')
           this.placeOrderList({ s_id: this.station.s_id })
           if (this.station.s_tag == '2') {
             this.notificationWs()
@@ -348,15 +369,21 @@ export default {
       }
     },
     onSubmit() {
+      this.loading = true
       if (this.submitText == '结算') {
-        settlementOrder({ order_id: this.station.order_id }).then(res => {
-          if (res.errorCode != '0') {
-            this.$notify({ type: 'warning', message: res.errorMsg })
-          } else {
-            window.location.href = res.result.url
-          }
-          console.log(res)
-        })
+        settlementOrder({ order_id: this.station.order_id })
+          .then(res => {
+            this.loading = false
+            if (res.errorCode != '0') {
+              this.$notify({ type: 'warning', message: res.errorMsg })
+            } else {
+              window.location.href = res.result.url
+            }
+            console.log(res)
+          })
+          .catch(() => {
+            this.loading = false
+          })
       } else {
         let isFirst = true
         this.orderList.forEach(item => {
@@ -368,17 +395,29 @@ export default {
         if (this.site) {
           params.s_id = this.site
         }
-        commitOrder(params).then(() => {
-          this._toast('订单已提交', () => {
-            this.placeOrderList({ s_id: this.station.s_id })
-            if (this.station.s_tag == '2') {
-              this.notificationWs()
-            }
-            if (isFirst) {
-              pushStaff()
-            }
+        commitOrder(params)
+          .then(res => {
+            this.loading = false
+            console.log(res)
+            this._toast('订单已提交', () => {
+              this.placeOrderList({ s_id: this.station.s_id })
+              if (this.station.s_tag == '2') {
+                this.notificationWs()
+              }
+              if (isFirst) {
+                pushStaff(
+                  this.station.mer_id,
+                  this.station.s_name,
+                  this.station.store_id,
+                  this.station.uid,
+                  res.result.order_no
+                )
+              }
+            })
           })
-        })
+          .catch(() => {
+            this.loading = false
+          })
       }
     },
   },
@@ -405,6 +444,17 @@ export default {
     .van-row {
       margin: 10px 0;
     }
+  }
+}
+
+.van-empty {
+  /deep/.van-empty__image {
+    width: 220px;
+    height: 220px;
+  }
+
+  .van-button {
+    margin-top: 40px;
   }
 }
 

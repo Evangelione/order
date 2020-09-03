@@ -24,7 +24,7 @@ import {
   // SwitchCell,
   Uploader,
   ActionSheet,
-  // Dialog,
+  Dialog,
   // DropdownMenu,
   // DropdownItem,
   // Loading,
@@ -84,7 +84,7 @@ Vue.use(Stepper)
 // Vue.use(Switch).use(SwitchCell)
 Vue.use(Uploader)
 Vue.use(ActionSheet)
-// Vue.use(Dialog)
+Vue.use(Dialog)
 // Vue.use(DropdownMenu)
 // Vue.use(DropdownItem)
 // Vue.use(Loading)
