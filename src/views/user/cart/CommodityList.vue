@@ -284,6 +284,7 @@ export default {
         this.notificationWs().catch(() => {
           console.log('catch')
         })
+        this.placeOrderList({ s_id: sId })
       })
     },
   },

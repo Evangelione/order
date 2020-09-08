@@ -86,7 +86,7 @@
 
     <div class="recommend-box" v-if="recommendList.length">
       <van-divider>推荐搭配</van-divider>
-      <van-swipe :autoplay="3000" indicator-color="white">
+      <van-swipe :autoplay="recommendList.length > 1 ? 3000 : 0" indicator-color="white">
         <van-swipe-item :key="index" v-for="(item, index) in recommendList">
           <van-row gutter="18">
             <van-col

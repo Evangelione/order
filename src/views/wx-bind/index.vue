@@ -26,11 +26,14 @@ export default {
   created() {},
 
   mounted() {
+    const { code, state, redirect } = this.$route.query
     if (this.$cookie.get('wxAuth')) {
-      this.$router.go(-1)
+      this.$router.replace({
+        path: redirect,
+      })
       return
     }
-    const { code, state, redirect } = this.$route.query
+
     if (code && state) {
       getOpenID({ code, state }).then(() => {
         this.$router.replace({
