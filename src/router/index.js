@@ -1,31 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import copartner from './copartner'
+import customer from './customer'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    component: () => import(/* webpackChunkName: "Wap" */ '@/views/user'),
-    children: [
-      {
-        path: 'home',
-        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/home'),
-      },
-      {
-        path: 'find',
-        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/find'),
-      },
-      {
-        path: 'order',
-        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/order'),
-      },
-      {
-        path: 'mine',
-        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/mine'),
-      },
-    ],
-  },
+  customer,
+  copartner,
   {
     path: '/login',
     component: () => import(/* webpackChunkName: "Login" */ '@/views/login'),

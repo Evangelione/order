@@ -40,7 +40,6 @@ export default {
                 ticket: localStorage.getItem('ticket'),
               })
               .then(response => {
-                console.log(response)
                 if (response.data.error === 0) {
                   resolve(response.data.msg)
                 }

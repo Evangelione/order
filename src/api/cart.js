@@ -8,6 +8,11 @@ function getFormData(payload) {
 
 const { protocol } = window.location
 
+let url = 'go.9youke.com/robot'
+if (process.env.VUE_APP_ENV == 'prod') {
+  url = 'go.91gzt.com/robot'
+}
+
 // 获取用户订单内商品
 export const placeOrderList = payload => {
   return axios.post('/wap.php?g=Wap&c=ScanOrder&a=placeOrderList', getFormData(payload))
@@ -40,16 +45,19 @@ export const settlementOrder = payload => {
 export const commitOrder = payload => {
   return axios.post('/wap.php?g=wap&c=ScanOrder&a=order', getFormData(payload))
 }
-// ws通知
-export const notificationWs = ({ sid, uid }) => {
-  return axios.get(`${protocol}//go.9youke.com/robot/ws/update/${sid}/${uid}`)
-}
-// ws指定通知
-export const appointNotificationWs = ({ sid, uid }) => {
-  return axios.get(`${protocol}//go.9youke.com/robot/ws/appointUpdate/${sid}/${uid}`)
-}
+
+// // ws通知(除了自己)
+// export const notificationWs = ({ sid, uid }) => {
+//   return axios.get(`${protocol}//${url}/ws/update/${sid}/${uid}`)
+// }
+
+// // ws通知(只有自己)
+// export const notificationWsUid = ({ sid, uid }) => {
+//   return axios.get(`${protocol}//${url}/ws/updateUid/${sid}/${uid}`)
+// }
+
 export const pushStaff = (mer_id, s_name, store_id, uid, order_no) => {
-  return axios.post(`${protocol}//go.9youke.com/robot/staff/orderNotice`, {
+  return axios.post(`${protocol}//${url}/staff/orderNotice`, {
     mer_id,
     s_name,
     store_id,

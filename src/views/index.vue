@@ -119,7 +119,6 @@ export default {
     afterRead(file) {
       file.status = 'uploading'
       file.message = '上传中...'
-      console.log(file)
       this.img = file.content
       return true
     },

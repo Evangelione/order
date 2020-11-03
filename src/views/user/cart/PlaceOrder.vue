@@ -1,6 +1,6 @@
 <template>
   <base-layout :arrow="false" :header="station.s_name" @click-right="onClickRight" left right="点单">
-    <div>
+    <div class="vbbox">
       <van-card
         :class="item.status !== '0' ? 'green' : 'yellow'"
         :desc="commodityType(item.type)"
@@ -79,10 +79,11 @@
     <van-empty
       :image="require('@/assets/images/bg.png')"
       description="购物车内还没有商品哦"
-      v-if="orderList.length == 0"
+      v-if="orderList.length == 0 && !listLoading"
     >
       <van-button round type="primary" @click="onClickRight">去选商品</van-button>
     </van-empty>
+    <van-loading v-if="listLoading" class="loading">加载中...</van-loading>
 
     <div class="recommend-box" v-if="recommendList.length">
       <van-divider>推荐搭配</van-divider>
@@ -96,7 +97,7 @@
               style="text-align: center;"
               v-for="(i, index2) in item"
             >
-              <van-image :src="i.pic" height="70" width="100%" />
+              <van-image fit="cover" :src="i.pic" height="20vw" width="20vw" />
               <span style="font-size: 12px; color: #666;">{{ i.name || i.appoint_name }}</span>
             </van-col>
           </van-row>
@@ -157,6 +158,7 @@ import {
   settlementOrder,
   commitOrder,
   pushStaff,
+  stationList,
 } from '@/api/cart'
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
@@ -180,7 +182,7 @@ export default {
   },
 
   computed: {
-    ...mapState('order', ['station', 'orderList', 'recommendList']),
+    ...mapState('order', ['station', 'orderList', 'recommendList', 'listLoading']),
     ...mapGetters('order', ['totalPrice']),
     submitText() {
       if (this.orderList.length > 0) {
@@ -202,7 +204,9 @@ export default {
     },
     submitTip() {
       if (this.orderList.length > 0) {
-        return this.orderList[0].status === '2' ? '店员正在结算此订单' : '实际分配的技师可与店员联系确认'
+        return this.orderList[0].status === '2'
+          ? '店员正在结算此订单'
+          : '预选服务人员如有变动，工作人员会与您沟通确认。'
       } else {
         return ''
       }
@@ -213,6 +217,15 @@ export default {
       } else {
         return false
       }
+    },
+    isFirst() {
+      let bool = true
+      this.orderList.forEach(item => {
+        if (item.status !== '0') {
+          bool = false
+        }
+      })
+      return bool
     },
   },
 
@@ -310,7 +323,8 @@ export default {
       })
     },
     pickStation(data) {
-      console.log(data)
+      this.site = data.id
+      this.onSubmit()
     },
     addCommodity(num) {
       console.log(this.goods)
@@ -344,8 +358,10 @@ export default {
         })
       })
     },
+    // 提交前的校验，判断是否需要选择桌台
     stationCheck() {
       let check = false
+      // 如果rem里没有内容，则没有提交过，判断当前选择的内容是否需要选择桌台
       if (this.station.order_rem.length == 0) {
         this.orderList.forEach(item => {
           if (item.type == '1' && item.need_table == '1') {
@@ -359,13 +375,33 @@ export default {
           }
         })
       }
+      // 1个人 2多人 3临时，只有临时标识才需要选
       if (this.station.s_tag == '1' || this.station.s_tag == '2') {
         check = false
       }
+      // 不需要选标识
       if (!check) {
         this.onSubmit()
       } else {
-        this.$refs.stationPicker.toggle()
+        // 需要选标识
+        stationList({ store_id: this.station.store_id }).then(res => {
+          console.log(res)
+          this.stationList = res.result.map(item => {
+            if (item.status == 0) {
+              return {
+                text: item.s_name,
+                id: item.id,
+              }
+            } else {
+              return {
+                text: item.s_name + '（占用中）',
+                id: item.id,
+                disabled: true,
+              }
+            }
+          })
+          this.$refs.stationPicker.toggle()
+        })
       }
     },
     onSubmit() {
@@ -385,35 +421,44 @@ export default {
             this.loading = false
           })
       } else {
-        let isFirst = true
-        this.orderList.forEach(item => {
-          if (item.status !== '0') {
-            isFirst = false
-          }
-        })
-        let params = { s_user_id: this.station.s_id, order_id: this.station.order_id }
+        let params = { order_id: this.station.order_id }
+        if (this.station.order_rem.length != 0 && this.station.order_rem.s_id) {
+          params.s_id = this.station.order_rem.s_id
+        }
         if (this.site) {
           params.s_id = this.site
         }
         commitOrder(params)
           .then(res => {
             this.loading = false
+            if (res.errorCode != 0) {
+              this.$dialog.alert({
+                title: '提示',
+                message: res.errorMsg,
+              })
+              return
+            }
             console.log(res)
-            this._toast('订单已提交', () => {
-              this.placeOrderList({ s_id: this.station.s_id })
-              if (this.station.s_tag == '2') {
-                this.notificationWs()
-              }
-              if (isFirst) {
-                pushStaff(
-                  this.station.mer_id,
-                  this.station.s_name,
-                  this.station.store_id,
-                  this.station.uid,
-                  res.result.order_no
-                )
-              }
-            })
+            this.$dialog
+              .alert({
+                title: '提示',
+                message: res.result.msg,
+              })
+              .then(() => {
+                this.placeOrderList({ s_id: this.station.s_id })
+                if (this.station.s_tag == '2') {
+                  this.notificationWs()
+                }
+                if (this.isFirst) {
+                  pushStaff(
+                    this.station.mer_id,
+                    this.station.s_name,
+                    this.station.store_id,
+                    this.station.uid,
+                    res.result.order_no
+                  )
+                }
+              })
           })
           .catch(() => {
             this.loading = false
@@ -425,8 +470,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.recommend-box {
-  padding: 0 16px 100px 16px;
+.vbbox {
+  padding: 0 16px 90px 16px;
 }
 
 .package-box {
@@ -517,5 +562,14 @@ export default {
       margin-left: 4px;
     }
   }
+}
+
+.loading {
+  text-align: center;
+  margin-top: 50%;
+}
+
+.flex {
+  padding: 0 16px 100px 16px;
 }
 </style>

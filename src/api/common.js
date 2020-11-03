@@ -27,15 +27,18 @@ const registerAcc = payload => {
   return axios.post('/wap.php?g=Wap&c=Login&a=verifyReg', formData)
 }
 
-// 上传图片到oss
+// 上传图片到oss(商户权限)
 const uploadImage = payload =>
-  axios.post(`/appapi.php?c=Merchantapp&a=base64change`, {
+  axios.post('/appapi.php?c=Merchantapp&a=base64change', {
     ...payload,
     ticket: localStorage.getItem(process.env.VUE_APP_TOKEN),
   })
+
+// 上传图片到oss(phpsession权限)
+const uploadImagePHP = payload => axios.post('/wap.php?g=Wap&c=Upyun&a=base64change', qs.stringify(payload))
 
 const getWxCode = () => axios.get('/wap.php?g=wap&c=ScanOrder&a=getCode')
 
 const getOpenID = payload => axios.post('/wap.php?g=wap&c=ScanOrder&a=getOpenid', getFormData(payload))
 
-export { getLogo, smsCode, login, registerAcc, uploadImage, getWxCode, getOpenID }
+export { getLogo, smsCode, login, registerAcc, uploadImage, uploadImagePHP, getWxCode, getOpenID }

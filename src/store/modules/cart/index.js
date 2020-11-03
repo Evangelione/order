@@ -1,6 +1,15 @@
-import { placeOrderList, recommendGoods, notificationWs } from '@/api/cart'
+import { placeOrderList, recommendGoods } from '@/api/cart'
 import router from '@/router'
-import { SET_STATION, SET_ORDER_LIST, SET_WS, SET_RECOMMEND_LIST, START_TIMER, RESET_TIMER, CLEAR_TIMER } from './types'
+import {
+  SET_STATION,
+  SET_ORDER_LIST,
+  SET_WS,
+  SET_RECOMMEND_LIST,
+  START_TIMER,
+  RESET_TIMER,
+  CLEAR_TIMER,
+  CHANGE_LOADING,
+} from './types'
 // initial state
 const state = {
   ws: null,
@@ -9,6 +18,7 @@ const state = {
   recommendList: [],
   timer: null,
   heartTime: 55000,
+  listLoading: false,
 }
 
 // getters
@@ -82,54 +92,84 @@ const getters = {
 
 // actions
 const actions = {
-  connWs({ commit, state, dispatch }) {
+  connWs({ commit, state, dispatch }, payload) {
+    return new Promise((resolve, reject) => {
+      let url = 'go.9youke.com'
+      if (process.env.VUE_APP_ENV == 'prod') {
+        url = 'go.91gzt.com'
+      }
+      if (!payload.uid) {
+        reject()
+        return
+      }
+      const ws = new WebSocket(`wss://${url}/ws/conn/${payload.s_id}/${payload.uid}`)
+      //连接打开时触发
+      ws.onopen = function() {
+        if (payload.socket) {
+          ws.send(`{
+            "action": "update_order"
+          }`)
+          if (payload.socket != payload.s_id) {
+            ws.send(`{
+              "action": "update_order_sid",
+              "data": ${payload.socket}
+            }`)
+          }
+        }
+        console.log('Connection open ...')
+        // ws.send("ping")
+        commit(START_TIMER)
+        resolve(ws)
+      }
+      //接收到消息时触发
+      ws.onmessage = evt => {
+        console.log('Received Message: ' + evt.data)
+        const data = JSON.parse(evt.data)
+        commit(RESET_TIMER)
+        if (data.action === 'update') {
+          dispatch('placeOrderList', { s_id: state.station.s_id })
+        }
+      }
+      //连接关闭时触发
+      ws.onclose = function() {
+        commit(CLEAR_TIMER)
+        console.log('Connection closed.')
+      }
+      commit(SET_WS, ws)
+    })
     // let protocol = 'wss:'
     // if (window.location.protocol == 'https:') {
     //   protocol = 'wss:'
     // }
-    const ws = new WebSocket(`wss://go.9youke.com/ws/conn/${state.station.s_id}/${state.station.uid}`)
-    //连接打开时触发
-    ws.onopen = function() {
-      console.log('Connection open ...')
-      // ws.send("ping")
-      commit(START_TIMER)
-    }
-    //接收到消息时触发
-    ws.onmessage = evt => {
-      console.log('Received Message: ' + evt.data)
-      const data = JSON.parse(evt.data)
-      commit(RESET_TIMER)
-      if (data.action === 'update') {
-        dispatch('placeOrderList', { s_id: state.station.s_id })
-      }
-    }
-    //连接关闭时触发
-    ws.onclose = function() {
-      commit(CLEAR_TIMER)
-      console.log('Connection closed.')
-    }
-    commit(SET_WS, ws)
   },
-  placeOrderList({ commit, state, dispatch }, payload) {
-    placeOrderList(payload).then(res => {
-      if (res.result.action === 'go_back') {
-        router.replace(`/cart/${res.result.s_id}`)
-        dispatch('placeOrderList', { s_id: res.result.s_id })
-        return
-      }
-      commit(SET_STATION, res.result.info)
-      commit(SET_ORDER_LIST, res.result.list)
-      if (!state.ws && state.station.uid) {
-        dispatch('connWs')
-      }
-      router.getMatchedComponents().forEach(item => {
-        switch (item.name) {
-          case 'PlaceOrder':
-            dispatch('recommendGoods')
-            break
+  placeOrderList({ commit, dispatch }, payload) {
+    commit(CHANGE_LOADING, true)
+    placeOrderList(payload)
+      .then(res => {
+        commit(CHANGE_LOADING, false)
+        if (res.result.action === 'go_back') {
+          router.replace(`/cart/${res.result.s_id}`)
+          dispatch('placeOrderList', { s_id: res.result.s_id })
+          return
         }
+        commit(SET_STATION, res.result.info)
+        commit(SET_ORDER_LIST, res.result.list)
+        if (!state.ws && state.station.uid) {
+          dispatch('connWs', { s_id: res.result.info.s_id, uid: res.result.info.uid }).then(res => {
+            console.log(res)
+          })
+        }
+        router.getMatchedComponents().forEach(item => {
+          switch (item.name) {
+            case 'PlaceOrder':
+              dispatch('recommendGoods')
+              break
+          }
+        })
       })
-    })
+      .catch(() => {
+        commit(CHANGE_LOADING, false)
+      })
   },
   recommendGoods({ state, commit, getters }) {
     recommendGoods({
@@ -154,8 +194,8 @@ const actions = {
       for (let i = 0; i < Math.ceil(total / 4); i++) {
         let arr = []
         for (let j = 0; j < 4; j++) {
-          if (r[j]) {
-            arr.push(r[j])
+          if (r[i * 4 + j]) {
+            arr.push(r[i * 4 + j])
           }
         }
         result.push(arr)
@@ -164,10 +204,13 @@ const actions = {
     })
   },
   notificationWs({ state }) {
-    notificationWs({
-      sid: state.station.s_id,
-      uid: state.station.uid,
-    })
+    state.ws.send(`{
+      "action": "update_order"
+    }`)
+    // notificationWs({
+    //   sid: state.station.s_id,
+    //   uid: state.station.uid,
+    // })
   },
 }
 
@@ -189,8 +232,9 @@ const mutations = {
     state.timer = setInterval(() => {
       if (state.ws.readyState == 1) {
         console.log('连接状态，发送消息保持连接')
-        state.ws.send('ping')
-        console.log(this)
+        state.ws.send(`{
+          "action": "ping"
+        }`)
         this.commit('order/RESET_TIMER') // 如果获取到消息，说明连接是正常的，重置心跳检测
       } else {
         console.log('断开状态，尝试重连')
@@ -204,6 +248,9 @@ const mutations = {
   },
   [CLEAR_TIMER](state) {
     clearTimeout(state.timer)
+  },
+  [CHANGE_LOADING](state, payload) {
+    state.listLoading = payload
   },
 }
 

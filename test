@@ -1,0 +1,1282 @@
+用户点单
+
+https://aip.baidubce.com/rest/2.0/face/v3/search?access_token24.d51ad971266451e597447db1e16a958e.2592000.1593931042.282335-16818648
+https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=24.d51ad971266451e597447db1e16a958e.2592000.1593931042.282335-16818648
+
+
+GOOS=linux GOARCH=amd64 go build
+
+keymanager恢复密钥
+60D7-96D7-9FD0-1CD2 6E83-3A05-B7C2-7198 2603-DC6F-3C0E-7E07 4EA4-53B4-7B76-E50E
+
+JSON.parse(`{maycms{:json_encode($store_package_list)}`)
+
+cmake .. && make
+./uskit -port 8999
+
+cmake .. && make
+cp -r ../conf . && ./dmkit
+
+docker run -itd --name nginx -p 80:80 -p 443:443 -v /root/docker/nginx/html:/usr/share/nginx/html -v /root/docker/nginx/cert:/etc/nginx/cert -v /root/docker/nginx/logs:/var/log/nginx -v /root/docker/nginx/conf.d:/etc/nginx/conf.d -v /root/docker/nginx/conf/nginx.conf:/etc/nginx/nginx.conf --restart=unless-stopped --privileged nginx
+
+docker run -itd -p 6379:6379 --name redis -v /root/docker/redis/redis.conf:/etc/redis/redis.conf -v /root/docker/redis/data:/data --network yk-service --network-alias c_redis --restart=unless-stopped  redis redis-server /etc/redis/redis.conf --appendonly yes
+
+docker run -itd --name robot -p 8906:8906 --network yk-service --network-alias c_robot -v /root/docker/robot/:/root/robot/ --restart=unless-stopped --privileged yk/robot:v1
+
+docker run -itd --name uskit -p 8907:8888 --network yk-service --network-alias c_uskit -v /root/docker/uskit/conf:/root/uskit/_build/conf -v /root/docker/uskit/logs:/root/uskit/logs --restart=unless-stopped --privileged yk/uskit:v1
+
+docker run -itd --name dmkit --network yk-service --network-alias c_dmkit -v /root/docker/dmkit/conf:/root/dmkit/conf -v /root/docker/dmkit/logs:/root/dmkit/logs  --restart=unless-stopped --privileged yk/dmkit:v1
+
+/root/dmkit/4438956_go.9youke.com.key
+/root/dmkit/4438956_go.9youke.com.pem
+
+robot-release-1
+正式
+47.111.67.114
+root wVB8cVtKnME7nSh7
+
+测试
+47.98.244.204
+root  nDvZGHg4wciBRaU4
+Vnc 957955
+
+466656017@qq.com
+Kevin_JQR2020_wlm
+
+scp robot  root@47.111.67.114:/root/www
+
+firewall-cmd —zone=public  —add-prot=3306/tcp —permanent
+firewall-cmd  —reload
+
+
+172.16.254.129/24
+
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "Upgrade";
+
+新的linux服务器
+robot-release-1
+47.111.67.114
+root wVB8cVtKnME7nSh7
+
+7youke
+Lv175259.
+
+百度AI开放平台：
+http://ai.baidu.com/
+账号：13588016995
+密码： Kevin_2020_jy
+
+
+2VXK-XUDJ-LPUJ-T9XY
+
+Array List Set Map
+
+Wap/pure/serPro/getPackageDetail.php
+Wap/pure/serPro/getPackageList.php
+Wap/pure/serPro/payPackage.php
+
+
+common.removeCache('isStarted',true);
+common.removeCache('ticket',true)
+common.removeCache('store_staff',true);
+common.removeCache('indexData',true)
+common.removeCache('us_ac')
+common.removeCache('us_pw')
+common.removeCache('ticket')
+localStorage.removeItem('ticket')
+
+
+
+每次追加商品都新存一条记录，
+
+
+本条记录的电商商品是合并的，服务 是拆开的。    套餐内的服务是拆开的 电商商品是合并的
+
+
+查询时把相同订单状态的电商商品合到一起，服务和套餐还是拆开显示的
+
+
+
+
+
+店员点单
+
+1.店员不能取消 已经开始服务的套餐和服务。 因为这样做权限太高（出于考虑店铺的情况，以后可能会加入高级权限，例如店长才能取消某个订单内的已开始服务或套餐）
+
+2.目前店员只支持取消整个订单。（加备注取消）
+
+3.服务和套餐，如果已经加入购物车，则不能从点单界面减少数量，只能从结算中列表删除，（已开始服务的套餐和服务不能删除，只能取消整个订单）
+
+
+swagger generate spec -o ./api/swagger.json
+
+
+git chenchen 123456
+svn chenchen cc123456
+
+
+
+
+
+// swarm集群创建
+Swarm initialized: current node (eec470mpblk21hm16uwqla0b1) is now a manager.
+
+docker swarm join \
+    --token SWMTKN-1-3et8ube1hdnm51zu23msllo8ig34zmgismu6vo4vup2czilkmu-c6ovk3q43cv6ygzv27ozw0pqh \
+    172.16.254.133:2377
+
+
+// 集群网络创建
+docker network create -d overlay --attachable swarm_mysql
+
+
+// pxc集群创建
+docker run -d -p 9001:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC1 -e XTRABACKUP_PASSWORD=abc123456 -v pnv1:/var/lib/mysql --privileged --name=pn1 --net=swarm_mysql pxc
+
+// pxc集群加入
+docker run -d -p 9001:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC1 -e XTRABACKUP_PASSWORD=abc123456 -e CLUSTER_JOIN=pn1 -v pnv2:/var/lib/mysql --privileged --name=pn2 --net=swarm_mysql pxc
+
+docker run -d -p 9001:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC1 -e XTRABACKUP_PASSWORD=abc123456 -e CLUSTER_JOIN=pn1 -v pnv3:/var/lib/mysql --privileged --name=pn3 --net=swarm_mysql pxc
+
+docker run -d -p 9001:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC1 -e XTRABACKUP_PASSWORD=abc123456 -e CLUSTER_JOIN=pn1 -v pnv4:/var/lib/mysql --privileged --name=pn4 --net=swarm_mysql pxc
+
+
+// pxc集群创建
+docker run -d -p 9002:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC2 -e XTRABACKUP_PASSWORD=abc123456 -v pnv5:/var/lib/mysql --privileged --name=pn5 --net=swarm_mysql pxc
+
+// pxc集群加入
+docker run -d -p 9002:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC2 -e XTRABACKUP_PASSWORD=abc123456 -e CLUSTER_JOIN=pn5 -v pnv6:/var/lib/mysql --privileged --name=pn6 --net=swarm_mysql pxc
+
+docker run -d -p 9002:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC2 -e XTRABACKUP_PASSWORD=abc123456 -e CLUSTER_JOIN=pn5 -v pnv7:/var/lib/mysql --privileged --name=pn7 --net=swarm_mysql pxc
+
+docker run -d -p 9002:3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e CLUSTER_NAME=PXC2 -e XTRABACKUP_PASSWORD=abc123456 -e CLUSTER_JOIN=pn5 -v pnv8:/var/lib/mysql --privileged --name=pn8 --net=swarm_mysql pxc
+
+// replication集群创建.  mishamx/mysql
+docker run -d -p 9003:3306 --name rn1 -e MYSQL_MASTER_PORT=3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv1:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+// replication集群加入
+docker run -d -p 9003:3306 --name rn2 -e MYSQL_MASTER_HOST=rn1 -e MYSQL_MASTER_PORT=3306  -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv2:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+docker run -d -p 9003:3306 --name rn3 -e MYSQL_MASTER_HOST=rn1 -e MYSQL_MASTER_PORT=3306  -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv3:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+docker run -d -p 9003:3306 --name rn4 -e MYSQL_MASTER_HOST=rn1 -e MYSQL_MASTER_PORT=3306  -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv4:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+
+// replication集群创建.  mishamx/mysql
+docker run -d -p 9004:3306 --name rn5 -e MYSQL_MASTER_PORT=3306 -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv5:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+// replication集群加入
+docker run -d -p 9004:3306 --name rn6 -e MYSQL_MASTER_HOST=rn5 -e MYSQL_MASTER_PORT=3306  -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv6:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+docker run -d -p 9004:3306 --name rn7 -e MYSQL_MASTER_HOST=rn5 -e MYSQL_MASTER_PORT=3306  -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv7:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+docker run -d -p 9004:3306 --name rn8 -e MYSQL_MASTER_HOST=rn5 -e MYSQL_MASTER_PORT=3306  -e MYSQL_ROOT_PASSWORD=abc123456 -e MYSQL_REPLICATION_USER=backup -e MYSQL_REPLICATION_PASSWORD=backup123 -v rnv8:/var/lib/mysql --privileged --net=swarm_mysql rep
+
+
+
+Zookeeper
+docker run -d --name z1 -p 2181:2181 -p 3888:3888 -p 2888:2888 --net=swarm_mysql zookeeper
+
+keepalived 双机热备
+开启防火墙支持vrrp协议
+firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 --in-interface ens33 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
+
+
+/baidu/getFaceID
+/baidu/faceSearch
+/eventTracking/movieTracking
+/spread/list
+
+
+/etc/profile （建议不修改这个文件 ）
+ 全局（公有）配置，不管是哪个用户，登录时都会读取该文件。
+
+/etc/bashrc    （一般在这个文件中添加系统级环境变量）
+全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。
+我在这里加入mysqlstart、mysql和mysqladmin命令的别名，保证每一个用户都可以使用这3个命令。
+
+~/.bash_profile  （一般在这个文件中添加用户级环境变量）
+注：Linux 里面是 .bashrc 而 Mac 是 .bash_profile
+若bash shell是以login方式执行时，才会读取此文件。该文件仅仅执行一次!默认情况下,他设置一些环境变量
+
+
+source …
+
+
+新零售模块拆分
+
+
+1.企业系统：商家，店铺，员工，部门，角色，权限，财务		Replication
+2.销售系统：产品，商品，订单							PXC和Replication
+3.售后系统：购物评价，退换货							Replication
+4.仓库系统：进销存										Replication
+5.物流系统：快递信息跟踪								Replication
+
+
+
+
+
+用户服务
+
+商品服务
+
+促销服务
+
+订单服务
+
+数据分析服务
+
+
+Python 微服务底层接口开发
+
+Golang 中间层负责底层接口调用，与网关交互，负载均衡
+
+分布式难点，分布式锁，分布式事务，幂等性
+
+高可用 链路追踪，熔断，限流
+
+api 网关
+
+自动化部署
+
+
+
+
+
+创建智能屏
+
+修改竖屏为设备类型：机器人，ai屏，触摸屏
+
+选择用户身份，
+
+有订单状态下见面配置间隔时间话术
+
+例如。已接单 第一次话术 30分钟后话术1小时后话术
+
+商品服务都有，服务取最慢的
+
+打招呼配置
+
+意图执行配置
+
+
+
+
+
+扫个人，关闭二维码，清空订单（update当前机器）
+
+扫公共，关闭二维码，清空订单（update当前机器）
+
+扫多人，关闭二维码（update当前机器和其他人）
+
+
+
+docker 镜像
+
+nginx
+docker run -itd --name nginx -p 80:80 -p 443:443 -v /root/nginx/html:/usr/share/nginx/html -v /root/nginx/cert:/etc/nginx/cert -v /root/nginx/logs:/var/log/nginx -v /root/nginx/conf.d:/etc/nginx/conf.d -v /root/nginx/conf/nginx.conf:/etc/nginx/nginx.conf --restart=unless-stopped --privileged nginx
+
+redis
+docker run -itd -p 6379:6379 --name redis -v /root/redis/redis.conf:/etc/redis/redis.conf -v /root/redis/data:/data --network yk-service --network-alias c_redis --restart=unless-stopped  redis redis-server /etc/redis/redis.conf --appendonly yes
+
+robot
+docker run -itd --name robot -p 8906:8906 --network yk-service --network-alias c_robot -v /root/robot/:/root/robot/ --restart=unless-stopped --privileged registry.cn-hangzhou.aliyuncs.com/9youke/robot:v1
+
+dmkit
+docker run -itd --name dmkit -p 8908:8011 --network yk-service --network-alias c_dmkit -v /root/dmkit/conf:/root/dmkit/_build/conf -v /root/dmkit/logs:/root/dmkit/logs  --restart=unless-stopped --privileged registry.cn-hangzhou.aliyuncs.com/9youke/dmkit:v2 ./dmrun.sh
+
+uskit
+docker run -itd --name uskit -p 8907:8888 --network yk-service --network-alias c_uskit -v /root/uskit/conf:/root/uskit/_build/conf -v /root/uskit/logs:/root/uskit/logs --restart=unless-stopped --privileged registry.cn-hangzhou.aliyuncs.com/9youke/uskit:v3 ./usrun.sh
+
+
+
+时区
+容器内执行
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+
+乱码
+容器内执行
+yum install kde-l10n-Chinese -y
+yum install glibc-common -y
+
+localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
+
+vi /etc/profile ->  export LC_ALL=zh_CN.utf8
+
+source /etc/profile
+
+
+
+
+
+ffmpeg -f s16le -ar 16000 -ac 1 -i ec4cc017-7f5e-4de9-a0d8-5671d15ad818-图片。.pcm -ar 16000 -ac 1 1.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i 33ccb99a-119b-45dd-ad6e-419412e78e91-语音。.pcm -ar 16000 -ac 1 2.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i bb36a922-bdcb-41e1-bc8b-a39f5c0b8fe4-语音。.pcm -ar 16000 -ac 1 3.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i bab608d7-4710-4bf2-8ad4-b6b06cc87dcd-语音。.pcm -ar 16000 -ac 1 4.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i 3ff01759-84c5-4092-bc1c-6962ca3fda7b-语音。.pcm -ar 16000 -ac 1 5.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i c8fa857b-e42d-4374-8499-a301d3e70b0c-语音。.pcm -ar 16000 -ac 1 6.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i 075c5d26-6c17-4a62-b6e7-cd1551df8f3c-图片。.pcm -ar 16000 -ac 1 7.mp3
+ffmpeg -f s16le -ar 16000 -ac 1 -i a76efa60-e4c2-410f-937f-60dbc64d3fcc-语音。.pcm -ar 16000 -ac 1 8.mp3
+
+
+ffmpeg -f s16le -ar 16000 -ac 1 -i 0060e08e-0202-45c0-b6d9-1809a72b5b96-删除的一个。.pcm -ar 16000 -ac 1 8.mp3
+
+
+
+
+
+
+
+
+
+
+Sql优化
+
+1.不写select *
+2.不使用模糊查询，因为会忽略索引，进行全表查询，可以用%结束
+3.对order by排序的字段设置索引，因为索引是二叉树机制，加了索引的话排序非常快
+4.少用is null 和 is not null，因为会跳过索引，进行全表扫描（解决方法1：使用其他条件排除null 。解决方法2：字段设置not null）
+5.少用!=，因为无法利用二叉树机制，变成了全表扫描（解决方法1：no!=20  —> no<20 AND no > 20 ）
+6.少用or，or之前的表达式会利用索引，or之后的表达式会跳过索引执行全表扫描 （解决方法1： no = 20 or no  = 30  —> no = 20 union all no = 30）
+7.少用in 和 not in 解决办法同上，用union all 改造，将1条sql改为2条sql 合并查询结果
+8.避免条件语句中的数据类型转换，例如 select name from emp where no = ’20’
+9.在表达式的左侧不要使用运算符和函数，这样会让索引失效，例如 select name from emp where salary*12>=100000  —> select name from emp where salary>=100000/12
+select name from emp where year(hiredate)>=2000 —> select name from emp where hiredate >=‘2000-01-01 00:00:00’ 
+
+
+Mysql参数优化
+1.最大并发连接数 max_connections（默认151，推荐为当前连接数的85%），当前连接数max_used_connections
+最大连接数不是越大越好，要根据服务器内存是否够用判断 例如： 4cpu 8核的 内存128g的服务器 max_connections=3000 大约消耗800M内存 但是虚拟机内存为1gb，所以不能把并发连接数设置太大，
+2.back_log是存放执行请求的堆栈大小，默认是50。当最大连接满了的时候，mysql会把新的请求放入堆栈，推荐设置为最大连接数的30%
+3.并发的线程数量 innodb_thread_concurrency最好设置为cpu核心数的2倍
+4.超时时间，默认8小时太浪费资源，按实际使用需求设置
+5.innoDB的缓存，第一部分，从数据表缓存了部分数据 ；第二部分，部分索引数据，innodb_buffer_pool_size是innoDB的缓存容量，默认为128M，推荐设置为主机内存的70%～80%
+6.开启慢查询日志 slow_query_log 默认是off； long_query_time可以规定超过多少秒是慢查询，单位是秒
+
+
+
+RESTful
+
+仓库
+
+List organization repositories
+GET /orgs/{org}/repos
+Create an organization repository
+POST /orgs/{org}/repos
+
+
+Get a repository
+GET /repos/{owner}/{repo}
+Update a repository
+PATCH /repos/{owner}/{repo}
+Delete a repository
+DELETE /repos/{owner}/{repo}
+
+
+Enable automated security fixes
+PUT /repos/{owner}/{repo}/automated-security-fixes
+Disable automated security fixes
+DELETE /repos/{owner}/{repo}/automated-security-fixes
+
+
+List repository contributors
+GET /repos/{owner}/{repo}/contributors
+
+
+Create a repository dispatch event
+POST /repos/{owner}/{repo}/dispatches
+
+
+List repository languages
+/repos/{owner}/{repo}/languages
+
+
+List repository tags
+GET /repos/{owner}/{repo}/tags
+
+
+List repository teams
+GET /repos/{owner}/{repo}/teams
+
+
+Get all repository topics
+GET /repos/{owner}/{repo}/topics
+
+
+Replace all repository topics
+PUT /repos/{owner}/{repo}/topics
+
+
+Transfer a repository
+POST /repos/{owner}/{repo}/transfer
+
+
+Check if vulnerability alerts are enabled for a repository
+GET /repos/{owner}/{repo}/vulnerability-alerts
+
+
+Enable vulnerability alerts
+PUT /repos/{owner}/{repo}/vulnerability-alerts
+
+
+Disable vulnerability alerts
+DELETE /repos/{owner}/{repo}/vulnerability-alerts
+
+
+Create a repository using a template
+POST /repos/{template_owner}/{template_repo}/generate
+
+
+List public repositories
+GET /repositories
+
+
+List repositories for the authenticated user
+GET /user/repos
+
+
+Create a repository for the authenticated user
+POST /user/repos
+
+
+List repositories for a user
+GET /users/{username}/repos
+
+
+List branches
+GET /repos/{owner}/{repo}/branches
+
+
+Get a branch
+GET /repos/{owner}/{repo}/branches/{branch}
+
+
+Get branch protection
+GET /repos/{owner}/{repo}/branches/{branch}/protection
+
+
+Update branch protection
+PUT /repos/{owner}/{repo}/branches/{branch}/protection
+
+
+Delete branch protection
+DELETE /repos/{owner}/{repo}/branches/{branch}/protection
+
+
+Get admin branch protection
+GET /repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins
+
+
+Update pull request review protection
+PATCH /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+
+
+Delete pull request review protection
+DELETE /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews
+
+
+Get commit signature protection
+GET /repos/{owner}/{repo}/branches/{branch}/protection/required_signature
+
+
+
+
+
+
+
+
+商家列表
+GET /merchants
+
+读取商家
+GET /merchants/{merchant}
+
+创建商家
+POST /merchants
+
+删除商家
+DELETE /merchants/{merchant}
+
+
+店铺列表
+GET /stores/{merchant}
+
+读取店铺
+GET /stores/{merchant}/{store}
+
+创建店铺
+POST /stores/{merchant}
+
+更新店铺
+PUT /stores/{merchant}/{store}
+
+删除店铺
+DELETE /stores/{merchant}/{store}
+
+
+店员列表
+GET /staffs/{merchant}
+
+读取店员
+GET /staffs/{merchant}/{staff}
+
+创建店员
+POST /staffs/{merchant}
+
+更新店员
+PUT /staffs/{merchant}/{staff}
+
+删除店员
+DELETE /staffs/{merchant}/{staff}
+
+
+店铺下的店员列表
+GET /stores/{merchant}/{store}/staffs
+
+读取店铺下的店员
+GET /stores/{merchant}/{store}/staffs/{staff}
+
+店铺与店员绑定
+POST /stores/{merchant}/{store}/staffs
+
+店铺与店员解绑
+DELETE /stores/{merchant}/{store}/staffs/{staff}
+
+
+通知列表
+GET /stores/{merchant}/{store}/notices
+
+创建通知
+POST /stores/{merchant}/{store}/notices
+
+读取通知
+GET /stores/{merchant}/{store}/notices
+
+删除通知
+DELETE /stores/{merchant}/{store}/notices
+
+
+服务列表
+GET /services/{merchant}
+
+读取服务
+GET /services/{merchant}/{service}
+
+创建服务
+POST /services/{merchant}
+
+更新服务
+PUT /services/{merchant}/{service}
+
+删除服务
+DELETE /services/{merchant}/{service}
+
+
+店铺绑定的服务项目列表
+GET /stores/{merchant}/{store}/services
+
+读取店铺下绑定的服务项目
+GET /stores/{merchant}/{store}/services/{service}
+
+创建店铺下绑定的服务项目
+POST /stores/{merchant}/{store}/services
+
+更新店铺下绑定的服务项目
+PUT  /stores/{merchant}/{store}/services/{service}
+
+删除店铺下绑定的服务项目
+DELETE /stores/{merchant}/{store}/services/{service}
+
+
+
+店铺下的服务项目的店员服务费用
+GET /store/{merchant}/{store}/services/{service}/staff-service-fee
+
+
+
+店铺下所有的岗位列表
+GET /stores/{merchant}/{store}/post
+
+
+
+所有岗位列表
+GET /posts
+
+读取岗位
+GET /posts/{post}
+
+创建岗位
+POST /posts
+
+更新岗位
+PUT /posts/{post}
+
+删除岗位
+DELETE /posts/{post}
+
+
+
+
+店员绑定人脸
+POST /staffs/{merchant}/{store}/staffs/{staff}/face
+
+店员删除人脸
+DELETE /staffs/{merchant}/stores/{store}/{staff}/face
+
+有推广码的店员
+GET /staffs/{merchant}/{store}/staffs/promotes
+
+
+
+商家下设备列表
+GET /devices/{merchant}
+
+店铺下的评价
+
+
+
+Egg
+
+Foo.hasOne(Bar)
+* fooInstance.getBar()
+* fooInstance.setBar()
+* fooInstance.createBar()
+
+Foo.belongsTo(Bar)
+来自 Foo.hasOne(Bar) 的相同内容:
+* fooInstance.getBar()
+* fooInstance.setBar()
+* fooInstance.createBar()
+
+
+Foo.hasMany(Bar)
+* fooInstance.getBars()
+* fooInstance.countBars()
+* fooInstance.hasBar()
+* fooInstance.hasBars()
+* fooInstance.setBars()
+* fooInstance.addBar()
+* fooInstance.addBars()
+* fooInstance.removeBar()
+* fooInstance.removeBars()
+* fooInstance.createBar()
+
+Foo.belongsToMany(Bar, { through: Baz })
+来自 Foo.hasMany(Bar) 的相同内容:
+* fooInstance.getBars()
+* fooInstance.countBars()
+* fooInstance.hasBar()
+* fooInstance.hasBars()
+* fooInstance.setBars()
+* fooInstance.addBar()
+* fooInstance.addBars()
+* fooInstance.removeBar()
+* fooInstance.removeBars()
+* fooInstance.createBar()
+
+
+
+Gin
+
+
+Parameters in path
+
+c.Param("name")
+c.FullPath()
+
+
+Querystring parameters
+
+c.DefaultQuery("firstname", "Guest")
+c.Query("lastname")
+
+
+Multipart/Urlencoded Form
+
+c.DefaultPostForm("nick", "anonymous")
+c.PostForm("message")
+
+
+Map as querystring or postform parameters
+
+c.QueryMap("ids")
+c.PostFormMap("names")
+
+
+Upload files
+
+c.FormFile("file")
+dst := path.Join("./uploads", file.Filename)
+c.SaveUploadedFile(file, dst)
+file, _ := c.FormFile("file")
+c.SaveUploadedFile(file, dst)
+c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+
+
+form, _ := c.MultipartForm()
+files := form.File["upload[]"]
+for _, file := range files {
+	dst := path.Join("./uploads", file.Filename)
+	c.SaveUploadedFile(file, dst)
+}
+
+
+Serving static files
+
+router.Static("/assets", "./assets")
+router.StaticFS("/more_static", http.Dir("my_file_system"))
+router.StaticFile("/favicon.ico", "./resources/favicon.ico")
+
+Serving data from file
+
+c.File("local/file.go")
+
+var fs http.FileSystem = // ...
+c.FileFromFS("fs/file.go", fs)
+
+
+
+* 		200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。
+* 		201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。
+* 		202 Accepted - [*]：表示一个请求已经进入后台排队（异步任务）
+* 		204 NO CONTENT - [DELETE]：用户删除数据成功。
+* 		400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。
+* 		401 Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。
+* 		403 Forbidden - [*] 表示用户得到授权（与401错误相对），但是访问是被禁止的。
+* 		404 NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。
+* 		406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。
+* 		410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。
+* 		422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。
+* 		500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。
+
+
+* 		GET /collection：返回资源对象的列表（数组）
+* 		GET /collection/resource：返回单个资源对象
+* 		POST /collection：返回新生成的资源对象
+* 		PUT /collection/resource：返回完整的资源对象
+* 		PATCH /collection/resource：返回完整的资源对象
+* 		DELETE /collection/resource：返回一个空文档
+
+
+TODO
+
+1. 创建店员时选择店员等级，上传店员照片https://www.9youke.com/wap.php?g=Wap&c=Merchant&a=store_list
+2. 创建服务时候，是否需要服务人员开启后选择店员等级，配置此等级服务费
+3. 标识创建时需添加座位最低消费
+
+
+
+
+
+
+
+1. https://www.9youke.com/wap.php?g=Wap&c=Servicenew&a=provider_lists 页面：
+
+	https://www.9youke.com/wap.php?g=Wap&c=Servicenew&a=ajaxProviderLists&area_url=3134&sort_id=juli&page=1
+	area_url 筛选地区无数：
+  5.. 页面：
+
+	https://www.9youke.com/wap.php?g=Wap&c=Merchant&a=ajaxList&sort_id=juli&page=1
+	area_url 添加地区筛选参数 
+
+docker run --detach \
+  --hostname gitlab.example.com \
+  --publish 443:443 --publish 81:80 --publish 23:22 \
+  --name gitlab \
+  --restart always \
+  --volume /srv/gitlab/config:/etc/gitlab \
+  --volume /srv/gitlab/logs:/var/log/gitlab \
+  --volume /srv/gitlab/data:/var/opt/gitlab \
+  gitlab/gitlab-ce:latest
+
+
+
+
+docker run --detach \
+--hostname gitlab.example.com \
+--publish 47.99.146.49:444:443 \
+--publish 47.99.146.49:81:80 \
+--publish 47.99.146.49:23:22 \
+--name gitlab \
+--restart always \
+--volume /srv/gitlab/config:/etc/gitlab \
+--volume /srv/gitlab/logs:/var/log/gitlab \
+--volume /srv/gitlab/data:/var/opt/gitlab \
+gitlab/gitlab-ce:latest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.layermbox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 19891014;
+}
+.laymshade {
+  background-color: rgba(0,0,0, .5);
+  pointer-events: auto;
+}
+.laymshade, .layermmain {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.layermmain {
+  display: table;
+  font-family: Helvetica, arial, sans-serif;
+  pointer-events: none;
+}
+.laymshade, .layermmain {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.layermmain .section {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.layermchild {
+  max-width: 70%!important;
+  min-width: 70%!important;
+}
+.layermchild {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+}
+.layermchild {
+  max-width: 70%!important;
+  min-width: 70%!important;
+}
+.layermcont {
+  padding: 36px 15px;
+  line-height: 22px;
+  border-radius: 5px 5px 0 0;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #999;
+}
+.layermbtn {
+  height: 50px;
+  line-height: 50px;
+  /* background-color: #eac07b!important; */
+  background-color: #fff!important;
+  color: #fff!important;
+  border-radius: 0 0 5px 5px;
+}
+.layermbtn span {
+  height: 50px;
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0 5px 0 0;
+}
+.layermbtn span:nth-of-type(1){
+  /* background-color: #eac07b!important; */
+  background-color: #fff!important;
+  color: #000!important;
+  font-size: 16px;
+  border-radius: 0 0  0 5px;
+}
+.layermbtn span:nth-of-type(2) {
+  background: #F1242D!important;
+  color: #fff!important;
+  border-radius: 0 0 5px 0;
+}
+
+
+
+Build
+
+Mac 编译生成Linux二进制文件：CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
+
+
+Dockerfile
+
+FROM            golang
+MAINTAINER      cc
+WORKDIR         /root
+ADD             ./AISP ./AISP
+ADD             ./config ./config
+ADD             ./static ./static
+RUN             GO111MODULE=on CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+EXPOSE          8888
+ENTRYPOINT      ["./AISP"]
+
+
+
+
+WORKDIR 		在镜像内的工作目录
+ADD 			将文件copy到工作目录下   前面是当前目录，后面是镜像内目录
+RUN				执行之前运行的命令
+EXPOSE			运行的端口
+ENTRYPOINT		执行的命令
+
+
+ server {
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location / {
+	    # 目录位置
+            alias       /var/www/vue/dist/;
+
+	    # history路由需要加这条
+            # try_files $uri $uri/ /index.html;
+        }
+
+        location /appapi.php {
+            proxy_pass  http://www.9youke.com;
+        }
+
+        error_page 404 /404.html;
+            location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+            location = /50x.html {
+        }
+    }
+
+
+
+docker run --detach \
+  --hostname gitlab.example.com \
+  --publish 443:443 --publish 81:80 --publish 23:22 \
+  --name gitlab \
+  --restart always \
+  --volume /srv/gitlab/config:/etc/gitlab \
+  --volume /srv/gitlab/logs:/var/log/gitlab \
+  --volume /srv/gitlab/data:/var/opt/gitlab \
+  gitlab/gitlab-ce:latest
+
+
+
+  102075776
+33310508
+1804319019
+3258263005
+2039150186
+
+
+
+
+https://www.9youke.com/wap.php?g=Wap&c=UserOrder&a=userOrderSheet&store_id=313
+
+1.用户点单页面传位置和服务人员的位置有问题
+2.选服务有问题
+
+
+// 解析参数
+var rd ReqData
+err := lib.BindParams(c, &rd)
+if err != nil {
+	resp.Success(c, -1, err.Error(), nil)
+	return
+}
+
+// 存储BotSession
+botSession := redis.Get("botSession" + rd.UID)
+
+// 构造DMKit参数
+request := DMKitReq{
+	Version: "2.0",
+	BotID:   "123",
+	LogID:   "1234",
+	Request: DMKitReqParam{
+		UserID: rd.UID,
+		Query:  rd.Query,
+		QueryInfo: DMKitReqParamQueryInfo{
+			Type:          "TEXT",
+			Source:        "ASR",
+			AsrCandidates: nil,
+		},
+		BernardLevel: 1,
+	},
+	BotSession: botSession,
+}
+
+// 请求DMKit
+r, err := req.Post(lib.DMKitAPI, req.BodyJSON(&request))
+if err != nil {
+	resp.Success(c, -1, err.Error(), nil)
+	return
+}
+
+var body DMKit
+if err = r.ToJSON(&body); err != nil {
+	resp.Success(c, -1, err.Error(), nil)
+	return
+}
+
+if body.ErrorCode != 0 {
+	resp.Success(c, -1, err.Error(), nil)
+	return
+}
+
+redis.Set("botSession"+rd.UID, body.Result.BotSession, time.Hour*2)
+
+// 请求返回
+var result RespData
+result.Action = body.Result.Response.Schema.Intent
+
+// Store BotSession
+fmt.Printf("%+v", body)
+
+action := body.Result.Response.ActionList[0]
+
+if action.Type == "event" {
+	result.Type = 1
+	var cr CustomReply
+	if err := json.Unmarshal([]byte(action.CustomReply), &cr); err != nil {
+		resp.Success(c, -1, err.Error(), nil)
+		return
+	}
+
+	for _, item := range cr.Result.Result {
+		if item.Type == "tts" {
+			result.Say = item.Value
+		}
+	}
+
+} else {
+	result.Type = 0
+	result.Say = action.Say
+}
+
+resp.Success(c, 0, "", result)
+
+//fmt.Printf("%s\n", dl.EndTime)
+
+//fmt.Printf("%+v\n", dl)
+
+//// Find device
+//var d model.Device
+//device, err := d.FindByIMaxId(dl.IMei)
+//if err != nil {
+//	resp.ServerErr(c, "设备未开启")
+//	return
+//}
+//
+//// Set device to gin.Context
+//c.Set("device", device)
+//
+//if dl.SessionId != "" {
+//	if dl.Uid != "" {
+//
+//	}
+//}
+
+
+
+
+Dmkit
+
+启动dmkit服务，根据conf/gflags.conf里的配置访问dmkit服务，默认请求链接为http://127.0.0.1:8010/search
+
+请求参数：
+{
+    "version": "2.0",
+    "bot_id": "1015464",
+    "log_id": "1",
+    "request": {
+        "user_id": "2",
+        "query": "3月",
+        "query_info": {
+            "type": "TEXT",
+            "source": "ASR",
+            "asr_candidates": []
+        },
+        "updates": "",
+        "client_session": "{\"client_results\":\"\", \"candidate_options\":[]}",
+        "bernard_level": 1
+    },
+    "bot_session": ""
+}
+
+返回结果：
+{
+    "result”: {},
+    "error_code": “0”,
+    "error_msg": "",
+}
+
+先判断error_code是不是0，如果不为0则dmkit报错
+
+继而存储result.bot_session用于下次对话状态记录，
+
+返回值为result.response
+
+击中的意图列表为actions_lists
+
+判断 actions_lists[0].type 是否为event，是->击中意图，否->未击中意图，
+
+未击中意图可以返回actions_lists[0].say用于回复话术
+
+击中意图后判断actions_lists[0].custom_reply.event_name是否为DM_RESULT，否->不是dmkit返回，是->dmkit返回
+
+是dmkit返回则遍历actions_lists[0].custom_reply.result
+
+判断每一个item.type是否为tts，是->语音播报，不是->自定义类型。根据自定义的规范来实现。*注意，func_val方法的值必须是200才会显示结果
+
+
+
+
+
+
+func_val用法：
+1.直接将接口结果返回
+{
+  "name": "usage",
+  "type": "func_val",
+  "value": "service_http_post:custom_service,/cookie/test,{\"name\": \"cc\",\"imax_id\": \"123\"}"
+},
+
+
+2.如果需要值内的某个字段值则需要如下方法在params取出，用于结果返回
+{
+  "name": "re",
+  "type": "func_val",
+  "value": "json_get_value:{%usage%},name"
+}
+
+更新_build目录下的conf目录后运行dmkit
+cd _build && cp -r ../conf . && ./dmkit
+
+
+
+
+{\"client_results\":\"\",\"ceshi\":\"ces\",\"candidate_options\":[{\"attributes\":{\"name\":\"百度大厦\",\"addr\":\"上地十街\",\"distance\":\"2.3km\"},\"slot_updates\":{\"user_to\":\"百度大厦\"},\"remember\":false},{\"attributes\":{\"name\":\"百度科技园\",\"addr\":\"西北旺10号\",\"distance\":\"164m\"},\"slot_updates\":{\"user_to\":\"百度科技园\"},\"remember\":false}]}
+
+
+
+
+
+
+create table city(
+city_id smallint unsigned not null auto_increment, 
+city varchar(50) not null, 
+country_id smallint unsigned not null, 
+last_update timestamp not null default current_timestamp on update current_timestamp, 
+primary key (city_id), 
+key idx_fk_country_id (country_id), 
+constraint 'fk_city_country' foreign key (country_id) references country (country_id) on delete restrict on update cascade
+)engine=innodb default charset=utf8;
+
+
+
+// brpc: 
+按照版本需求安装所有依赖
+
+脚本拉取broc最新版本brpc
+
+brew uninstall protobuf
+brew install protobuf@3.6
+brew link --force protobuf@3.6
+
+// Mac删除
+// brpc/src/butil/mac/foundation_util.h下的54行
+// typedef struct OpaqueSecTrustRef* SecACLRef;
+// typedef struct OpaqueSecTrustedApplicationRef* SecTrustedApplicationRef;
+
+
+
+svn:
+
+
+由客：
+后端pc
+https://120.27.249.250:448/svn/youke/trunk/cms
+后端wap
+https://120.27.249.250:448/svn/youke/trunk/cms/Lib/Action/Wap
+https://120.27.249.250:448/svn/youke/trunk/cms/Lib/Action/WapMerchant
+https://120.27.249.250:448/svn/youke/trunk/cms/Lib/Action/Wechatxcx
+后端接口
+https://120.27.249.250:448/svn/youke/trunk/cms/Lib/Action/Appapi
+
+前端pc
+https://120.27.249.250:448/svn/youke/trunk/tpl
+前端wap
+https://120.27.249.250:448/svn/youke/trunk/tpl/Wap
+https://120.27.249.250:448/svn/youke/trunk/tpl/WapMerchant
+https://120.27.249.250:448/svn/youke/trunk/tpl/WapMerchat
+前端新商家中心wap
+https://120.27.249.250:448/svn/youke/trunk/html
+https://120.27.249.250:448/svn/youke/trunk/newpage
+前端配送中心wap
+https://120.27.249.250:448/svn/youke/trunk/packapp/deliver
+前端店员中心pc
+https://120.27.249.250:448/svn/youke/trunk/tpl/Merchant/Store
+前端店员中心wap
+https://120.27.249.250:448/svn/youke/trunk/packapp/storestaff
+前端静态资源(前端pc和前端wap)
+https://120.27.249.250:448/svn/youke/trunk/static
+由客修改记录
+https://120.27.249.250:448/svn/youke/trunk/由客修改记录
+
+车总管：
+后端pc
+https://120.27.249.250:448/svn/czg/trunk/cms
+后端wap
+https://120.27.249.250:448/svn/czg/trunk/cms/Lib/Action/Wap
+https://120.27.249.250:448/svn/czg/trunk/cms/Lib/Action/WapMerchant
+https://120.27.249.250:448/svn/czg/trunk/cms/Lib/Action/Wechatxcx
+后端接口
+https://120.27.249.250:448/svn/czg/trunk/cms/Lib/Action/Appapi
+
+前端pc
+https://120.27.249.250:448/svn/czg/trunk/tpl
+前端wap
+https://120.27.249.250:448/svn/czg/trunk/tpl/Wap
+https://120.27.249.250:448/svn/czg/trunk/tpl/WapMerchant
+https://120.27.249.250:448/svn/czg/trunk/tpl/WapMerchat
+前端新商家中心wap
+https://120.27.249.250:448/svn/czg/trunk/newpage
+前端配送中心wap
+https://120.27.249.250:448/svn/czg/trunk/packapp/deliver
+前端店员中心pc
+https://120.27.249.250:448/svn/czg/trunk/tpl/Merchant/Store
+前端店员中心wap
+https://120.27.249.250:448/svn/czg/trunk/packapp/storestaff
+前端静态资源(前端pc和前端wap)
+https://120.27.249.250:448/svn/czg/trunk/static
+由客修改记录
+https://120.27.249.250:448/svn/czg/trunk/由客修改记录
+
+
+

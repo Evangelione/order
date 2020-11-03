@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import {
   Button,
-  // Cell,
-  // CellGroup,
+  Cell,
+  CellGroup,
   Icon,
   Image,
   Row,
@@ -25,9 +25,9 @@ import {
   Uploader,
   ActionSheet,
   Dialog,
-  // DropdownMenu,
-  // DropdownItem,
-  // Loading,
+  DropdownMenu,
+  DropdownItem,
+  Loading,
   Notify,
   // PullRefresh,
   // SwipeCell,
@@ -39,7 +39,7 @@ import {
   // ImagePreview,
   Lazyload,
   // List,
-  // Panel,
+  Panel,
   // Step,
   // Steps,
   // Sticky,
@@ -66,7 +66,7 @@ import {
 } from 'vant'
 
 Vue.use(Button)
-// Vue.use(Cell).use(CellGroup)
+Vue.use(Cell).use(CellGroup)
 Vue.use(Icon)
 Vue.use(Image)
 Vue.use(Row).use(Col)
@@ -85,9 +85,9 @@ Vue.use(Stepper)
 Vue.use(Uploader)
 Vue.use(ActionSheet)
 Vue.use(Dialog)
-// Vue.use(DropdownMenu)
-// Vue.use(DropdownItem)
-// Vue.use(Loading)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Loading)
 Vue.use(Notify)
 // Vue.use(PullRefresh)
 // Vue.use(SwipeCell)
@@ -98,7 +98,7 @@ Vue.use(Empty)
 // Vue.use(ImagePreview)
 Vue.use(Lazyload)
 // Vue.use(List)
-// Vue.use(Panel)
+Vue.use(Panel)
 // Vue.use(Step).use(Steps)
 // Vue.use(Sticky)
 Vue.use(Swipe).use(SwipeItem)

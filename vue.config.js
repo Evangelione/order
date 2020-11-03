@@ -2,6 +2,12 @@ const autoprefixer = require('autoprefixer')
 const pxtoviewport = require('postcss-px-to-viewport')
 
 module.exports = {
+  pages: {
+    index: {
+      entry: 'src/main.js',
+      title: '由客',
+    },
+  },
   devServer: {
     // proxy: 'http://cs.7youke.com',
     proxy: 'https://www.9youke.com',
@@ -13,9 +19,9 @@ module.exports = {
     loaderOptions: {
       less: {
         modifyVars: {
-          'primary-base': '#F6BD44',
-          'primary-light': '#F9D651',
-          'primary-deep': '#FAA04C',
+          'primary-base': '#FFD344',
+          'primary-light': '#FFE75F',
+          'primary-deep': '#FFB744',
           // Functional Color
           'color-success': '#67C23A',
           'color-warning': '#E6A23C',
@@ -78,6 +84,9 @@ module.exports = {
           'swipe-indicator-active-background-color': '@primary-light',
           // dialog
           'dialog-confirm-button-text-color': '@primary-base',
+          // dropdown-menu
+          'dropdown-menu-title-active-text-color': '@primary-base',
+          'dropdown-menu-option-active-color': '@primary-base',
         },
       },
       postcss: {

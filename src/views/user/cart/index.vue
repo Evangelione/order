@@ -26,6 +26,8 @@ export default {
     // 微信静默授权
     var ua = navigator.userAgent.toLowerCase()
     var isWeixin = ua.indexOf('micromessenger') != -1
+    console.log(isWeixin)
+    console.log(this.$cookie.get('wxAuth'))
     if (isWeixin && !this.$cookie.get('wxAuth')) {
       this.$router.replace({
         name: 'wxBind',

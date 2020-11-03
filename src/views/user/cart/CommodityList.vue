@@ -131,7 +131,7 @@ export default {
   },
 
   computed: {
-    ...mapState('order', ['station']),
+    ...mapState('order', ['station', 'listLoading']),
     height() {
       return window.innerHeight - 130.8
     },

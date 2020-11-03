@@ -1,6 +1,7 @@
 import axios from 'axios'
 import router from '@/router'
 import { Toast } from 'vant'
+import VueCookie from 'vue-cookie'
 
 // axios.defaults.baseURL = process.env.VUE_APP_BASE_URL // 配置axios请求的地址
 
@@ -38,6 +39,13 @@ axios.interceptors.response.use(
               query: { redirect: router.currentRoute.fullPath },
             })
           },
+        })
+        return Promise.reject(response.data)
+      } else if (response.data.errorCode == '20044012') {
+        VueCookie.delete('wxAuth')
+        router.replace({
+          name: 'wxBind',
+          query: { redirect: router.currentRoute.fullPath },
         })
         return Promise.reject(response.data)
       }

@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { bindOrder, appointNotificationWs } from '@/api/cart'
+import { mapState, mapActions } from 'vuex'
+import { bindOrder } from '@/api/cart'
 
 export default {
   name: 'BindOrder',
@@ -20,7 +21,9 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapState('order', ['ws']),
+  },
 
   watch: {},
 
@@ -46,13 +49,23 @@ export default {
       staff_id: staff_id || 0,
     })
       .then(res => {
-        this.$router.replace({ path: `/cart/${res.result.s_id}` }, () => {
+        if (!this.ws) {
           // 绑定成功，推送屏幕更新订单
-          appointNotificationWs({
-            sid: res.result.s_id,
-            uid: '0',
+          this.connWs({
+            s_id: res.result.s_id,
+            uid: res.result.uid,
+            socket: res.result.socket,
+          }).then(ws => {
+            console.log(ws)
+            this.$router.replace({ path: `/cart/${res.result.s_id}` })
           })
-        })
+        } else {
+          this.$router.replace({ path: `/cart/${res.result.s_id}` }, () => {
+            this.ws.send(`{
+              "action": "update_order"
+            }`)
+          })
+        }
       })
       .catch(e => {
         console.log(e)
@@ -67,7 +80,9 @@ export default {
 
   destroyed() {},
 
-  methods: {},
+  methods: {
+    ...mapActions('order', ['connWs']),
+  },
 }
 </script>
 

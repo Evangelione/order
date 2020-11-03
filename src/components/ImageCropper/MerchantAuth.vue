@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-uploader :after-read="afterRead" :before-read="beforeRead" @delete="handleDelete" v-model="fileList" />
-    <VPopup height="100vh" ref="popup">
+    <v-popup height="100vh" ref="popup">
       <vue-cropper
         :canMove="false"
         :canScale="true"
@@ -23,16 +23,16 @@
           </van-col>
         </van-row>
       </template>
-    </VPopup>
+    </v-popup>
   </div>
 </template>
 
 <script>
-import { uploadImage } from '@/api/common'
 import Compressor from 'compressorjs'
 import VPopup from '@/components/VPopup'
 import VButton from '@/components/VButton'
 import { VueCropper } from 'vue-cropper'
+import { uploadImage } from '@/api/common'
 export default {
   name: 'ImageCropper',
 

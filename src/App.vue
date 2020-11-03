@@ -24,7 +24,6 @@ export default {
 
   mounted() {
     console.log(process.env.BASE_URL)
-    this.$toast.allowMultiple()
   },
 
   destroyed() {},
