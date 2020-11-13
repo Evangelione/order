@@ -69,8 +69,6 @@ module.exports = {
           'index-anchor-sticky-text-color': '@primary-base',
           // side-bar
           'sidebar-selected-border-color': '@primary-light',
-          // submit-bar
-          'submit-bar-price-color': '@primary-deep',
           // info
           'info-dot-color': '@primary-deep',
           'info-background-color': '@primary-deep',

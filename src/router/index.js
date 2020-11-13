@@ -31,6 +31,16 @@ const routes = [
     ],
   },
   {
+    path: '/promotion',
+    component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/promotion/index'),
+    children: [
+      {
+        path: '',
+        component: () => import(/* webpackChunkName: "Cart" */ '@/views/user/promotion/Product'),
+      },
+    ]
+  },
+  {
     path: '/wxBind',
     name: 'wxBind',
     component: () => import(/* webpackChunkName: "Cart" */ '@/views/wx-bind'),

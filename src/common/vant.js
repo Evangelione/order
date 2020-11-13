@@ -62,7 +62,11 @@ import {
   Card,
   // CouponCell,
   // CouponList,
+  GoodsAction,
+  GoodsActionIcon,
+  GoodsActionButton,
   SubmitBar,
+  Skeleton,
 } from 'vant'
 
 Vue.use(Button)
@@ -114,4 +118,6 @@ Vue.use(TreeSelect)
 Vue.use(Card)
 // Vue.use(CouponCell)
 // Vue.use(CouponList)
+Vue.use(GoodsAction).use(GoodsActionIcon).use(GoodsActionButton)
 Vue.use(SubmitBar)
+Vue.use(Skeleton)

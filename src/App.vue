@@ -50,4 +50,10 @@ body {
 .van-card__footer {
   margin-top: 6px;
 }
+
+.html {
+  img {
+    width: 100%;
+  }
+}
 </style>
