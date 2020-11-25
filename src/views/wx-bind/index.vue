@@ -33,18 +33,14 @@ export default {
       })
       return
     }
-    alert(1)
     if (code && state) {
-      alert(2)
       getOpenID({ code, state }).then(() => {
         this.$router.replace({
           path: redirect,
         })
       })
     } else {
-      alert(3)
       getWxCode({ code }).then(res => {
-        alert(JSON.stringify(res))
         window.location.href = res.result.referer
       })
     }

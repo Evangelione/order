@@ -22,7 +22,7 @@
           <div class="price">
             <span class="pre">¥</span>
             {{ goods_info.around_price }}
-            <span class="original_price">¥ {{ goods_info.old_price }}</span>
+            <span class="original_price">¥ {{ oldPrice(goods_info) }}</span>
           </div>
           <div class="tag">
             <van-tag>联盟推广</van-tag>
@@ -182,6 +182,7 @@ export default {
           window.location.href = `tel://${this.store_info.phone}`
           // on close
         })
+        .catch(() => {})
     },
     onSelect(item) {
       // 默认情况下点击选项时不会自动收起
@@ -200,6 +201,25 @@ export default {
           break
       }
       this.show = false
+    },
+    oldPrice(goods) {
+      // goods_info.old_price
+      let price = ''
+      switch (goods.goods_type) {
+        case '0':
+          price = goods.old_price
+          break
+        case '1':
+          break
+        case '2':
+          price = goods.show_price
+          break
+        case '4':
+          price = goods.old_price
+          break
+      }
+
+      return price
     },
     bd_decrypt(bd_lng, bd_lat) {
       var X_PI = (Math.PI * 3000.0) / 180.0
