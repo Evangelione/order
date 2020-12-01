@@ -14,6 +14,6 @@ function getFormData(payload) {
 // }
 
 // 获取用户订单内商品
-export const getGoodsInfo = payload => {
-    return axios.post('/wap.php?g=Wap&c=ScanOrder&a=spreadScan', getFormData(payload))
-}
+export const getGoodsInfo = payload => axios.post('/wap.php?g=Wap&c=ScanOrder&a=spreadScan', getFormData(payload))
+
+export const payGoods = payload => axios.post('/wap.php?g=Wap&c=ScanOrder&a=savePromotionOrder', getFormData(payload))

@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { getGoodsInfo } from '@/api/promotion'
+import { getGoodsInfo, payGoods } from '@/api/promotion'
 export default {
   name: 'PromotionProduct',
 
@@ -162,7 +162,18 @@ export default {
       window.location.href = 'https://www.9youke.com/wap.php?g=Wap&c=Mall&a=store_new&store_id=323'
     },
     onClickButton() {
-      this.$toast('商户暂未开通支付功能')
+      const { ad_id, imax_id, store_id, staff_id } = this.$route.query
+      payGoods({
+        ad_id,
+        imax_id,
+        store_id,
+        staff_id,
+      }).then(res => {
+        if (res.result && res.result.order_id) {
+          // window.location.href = `/wap.php?c=Pay&a=check&order_type=user_order&order_id=${res.result.order_id}`
+          window.location.href = `/wap.php?c=Pay&a=check&type=user_order&order_id=${res.result.order_id}`
+        }
+      })
     },
     onClickMap() {
       this.show = true
