@@ -172,6 +172,8 @@ export default {
         if (res.result && res.result.order_id) {
           // window.location.href = `/wap.php?c=Pay&a=check&order_type=user_order&order_id=${res.result.order_id}`
           window.location.href = `/wap.php?c=Pay&a=check&type=user_order&order_id=${res.result.order_id}`
+        } else if (res.errorMsg) {
+          this.$toast.fail(res.errorMsg)
         }
       })
     },
