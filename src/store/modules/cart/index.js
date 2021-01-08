@@ -233,7 +233,7 @@ const mutations = {
       if (state.ws.readyState == 1) {
         console.log('连接状态，发送消息保持连接')
         state.ws.send(`{
-          "action": "ping"
+          "action": "Ping"
         }`)
         this.commit('order/RESET_TIMER') // 如果获取到消息，说明连接是正常的，重置心跳检测
       } else {
