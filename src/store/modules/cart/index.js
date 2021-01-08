@@ -102,7 +102,7 @@ const actions = {
         reject()
         return
       }
-      const ws = new WebSocket(`wss://${url}/ws/conn/${payload.s_id}/${payload.uid}`)
+      const ws = new WebSocket(`wss://${url}/v2/ws/conn/${payload.s_id}/${payload.uid}`)
       //连接打开时触发
       ws.onopen = function() {
         if (payload.socket) {
