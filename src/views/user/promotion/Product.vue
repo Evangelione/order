@@ -162,20 +162,24 @@ export default {
       window.location.href = 'https://www.9youke.com/wap.php?g=Wap&c=Mall&a=store_new&store_id=323'
     },
     onClickButton() {
-      const { ad_id, imax_id, store_id, staff_id } = this.$route.query
-      payGoods({
-        ad_id,
-        imax_id,
-        store_id,
-        staff_id,
-      }).then(res => {
-        if (res.result && res.result.order_id) {
-          // window.location.href = `/wap.php?c=Pay&a=check&order_type=user_order&order_id=${res.result.order_id}`
-          window.location.href = `/wap.php?c=Pay&a=check&type=user_order&order_id=${res.result.order_id}`
-        } else if (res.errorMsg) {
-          this.$toast.fail(res.errorMsg)
-        }
-      })
+      if (this.store_info.open_weixin_pay == 1) {
+        const { ad_id, imax_id, store_id, staff_id } = this.$route.query
+        payGoods({
+          ad_id,
+          imax_id,
+          store_id,
+          staff_id,
+        }).then(res => {
+          if (res.result && res.result.order_id) {
+            // window.location.href = `/wap.php?c=Pay&a=check&order_type=user_order&order_id=${res.result.order_id}`
+            window.location.href = `/wap.php?c=Pay&a=check&type=user_order&order_id=${res.result.order_id}`
+          } else if (res.errorMsg) {
+            this.$toast.fail(res.errorMsg)
+          }
+        })
+      } else {
+        this.$toast('商户暂未开通支付功能')
+      }
     },
     onClickMap() {
       this.show = true
