@@ -2,7 +2,7 @@
   <van-skeleton title :row="8" :loading="loading">
     <div class="container">
       <van-swipe :autoplay="3000" @change="onChange">
-        <van-swipe-item v-for="(image, index) in images" :key="index">
+        <van-swipe-item v-for="(image, index) in images" :key="index" @click="onPreview">
           <img v-lazy="image" class="goods_img" />
         </van-swipe-item>
         <template #indicator>
@@ -31,7 +31,8 @@
           </div>
         </div>
         <div>
-          <div class="title">{{ goods_info.name }} {{ goods_info.description }}</div>
+          <div class="title">{{ goods_info.name }}</div>
+          <div>{{ goods_info.description }}</div>
         </div>
       </div>
       <div class="goods_container store_info">
@@ -52,7 +53,7 @@
       <van-divider :style="{ borderColor: '#ddd', padding: '0 16px' }">
         {{ goods_info.goods_type != '4' ? '图文详情' : '套餐内商品' }}
       </van-divider>
-      <div v-html="des" style="width: 100vw" v-if="goods_info.goods_type != '4'" class="html" />
+      <div v-html="des" style="width: 100vw" v-if="goods_info.goods_type != '4'" class="html" @click="onHtmlPreview" />
       <div v-else>
         <van-card
           :num="item.goods_num"
@@ -70,6 +71,8 @@
 
 <script>
 import { getGoodsInfo, payGoods } from '@/api/promotion'
+import { ImagePreview } from 'vant'
+
 export default {
   name: 'PromotionProduct',
 
@@ -131,6 +134,7 @@ export default {
           this.goods_info = res.result.goods_detail
           this.images = res.result.goods_detail.pic.split(',')
           this.des = res.result.goods_detail.appoint_pic_content
+          this.goods_info.name = res.result.goods_detail.appoint_name
           break
         case '4':
           this.goods_info = res.result.goods_detail
@@ -186,6 +190,14 @@ export default {
     },
     onChange(index) {
       this.current = index
+    },
+    onPreview() {
+      ImagePreview({
+        images: this.images,
+      })
+    },
+    onHtmlPreview(e) {
+      console.log(e)
     },
     onConactMer() {
       this.$dialog
