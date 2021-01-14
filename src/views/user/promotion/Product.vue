@@ -32,7 +32,7 @@
         </div>
         <div>
           <div class="title">{{ goods_info.name }}</div>
-          <div style="font-size:13px;">{{ goods_info.description }}</div>
+          <div style="font-size: 13px">{{ goods_info.description }}</div>
         </div>
       </div>
       <div class="goods_container store_info">
@@ -160,10 +160,20 @@ export default {
 
   methods: {
     onClickChat() {
-      window.location.href = 'https://www.9youke.com/wap.php?g=wap&c=hxim&a=index&store_id=323'
+      let url = 'www.9youke.com'
+      if (process.env.VUE_APP_ENV == 'prod') {
+        url = 'www.91gzt.com'
+      }
+      const { store_id } = this.$route.query
+      window.location.href = `${window.location.protocol}//${url}/wap.php?g=wap&c=hxim&a=index&store_id=${store_id}`
     },
     onClickStore() {
-      window.location.href = 'https://www.9youke.com/wap.php?g=Wap&c=Mall&a=store_new&store_id=323'
+      let url = 'www.9youke.com'
+      if (process.env.VUE_APP_ENV == 'prod') {
+        url = 'www.91gzt.com'
+      }
+      const { store_id } = this.$route.query
+      window.location.href = `${window.location.protocol}//${url}/wap.php?g=Wap&c=Mall&a=store_new&store_id=${store_id}`
     },
     onClickButton() {
       if (this.store_info.open_weixin_pay == 1) {
