@@ -5,7 +5,7 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/main.js',
-      title: '由客',
+      title: '由客智能科技',
     },
   },
   devServer: {
