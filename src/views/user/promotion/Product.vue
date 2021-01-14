@@ -287,7 +287,7 @@ export default {
 
 .goods_img {
   width: 100vw;
-  height: 80vw;
+  height: 100vw;
 }
 
 .goods_container {
