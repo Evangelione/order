@@ -32,7 +32,7 @@
         </div>
         <div>
           <div class="title">{{ goods_info.name }}</div>
-          <div>{{ goods_info.description }}</div>
+          <div style="font-size:13px;">{{ goods_info.description }}</div>
         </div>
       </div>
       <div class="goods_container store_info">
@@ -337,8 +337,9 @@ export default {
 }
 
 .title {
-  margin-top: 20px;
+  margin-top: 10px;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .indicator {
