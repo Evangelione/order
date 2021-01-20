@@ -102,12 +102,13 @@ export default {
   created() {},
 
   mounted() {
-    const { ad_id, imax_id, store_id, staff_id } = this.$route.query
+    const { ad_id, imax_id, store_id, staff_id, range } = this.$route.query
     getGoodsInfo({
       ad_id,
       imax_id,
       store_id,
       staff_id,
+      range,
     }).then(res => {
       if (res.errorCode != 0) {
         this.$dialog
